@@ -112,7 +112,6 @@ The following five graphs are generated from the recorded session data:
 
 ### Libraries & Frameworks
 
-> *(Update or remove rows based on the libraries you actually import)*
 
 | Library | Purpose | License |
 |---------|---------|---------|

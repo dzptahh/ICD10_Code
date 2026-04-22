@@ -85,7 +85,8 @@ class UI_Manager:
             font=("Helvetica", 10, "bold"),
         )
         self.style.configure("HUD.TLabel", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 11, "bold"))
-        self.style.configure("Card.TFrame", background=self.p.panel, borderwidth=1, relief="solid")
+        # Lighter card styling (avoid heavy grey borders)
+        self.style.configure("Card.TFrame", background=self.p.panel, borderwidth=1, relief="solid", bordercolor="#eef2f7")
 
         self.style.configure("TLabelframe", background=self.p.panel, borderwidth=1, relief="solid")
         self.style.configure("TLabelframe.Label", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 11, "bold"))
@@ -113,6 +114,35 @@ class UI_Manager:
             "Small.TButton",
             background=[("active", "#245dca"), ("!disabled", self.p.accent)],
             foreground=[("!disabled", "#ffffff")],
+        )
+
+        # Menu buttons (ttk, color-reliable under 'clam' theme)
+        self.style.configure(
+            "MenuPrimary.TButton",
+            font=("Helvetica", 11, "bold"),
+            padding=(14, 10),
+            borderwidth=0,
+            background="#2d6cdf",
+            foreground="#ffffff",
+        )
+        self.style.map(
+            "MenuPrimary.TButton",
+            background=[("pressed", "#1f4fb0"), ("active", "#245dca"), ("!disabled", "#2d6cdf")],
+            foreground=[("!disabled", "#ffffff")],
+        )
+        self.style.configure(
+            "MenuQuit.TButton",
+            font=("Helvetica", 11, "bold"),
+            padding=(14, 10),
+            borderwidth=1,
+            relief="solid",
+            background="#ffffff",
+            foreground="#d64545",
+        )
+        self.style.map(
+            "MenuQuit.TButton",
+            background=[("active", "#fff1f2"), ("!disabled", "#ffffff")],
+            foreground=[("!disabled", "#d64545")],
         )
 
         self.style.configure("Green.Horizontal.TProgressbar", troughcolor=self.p.panel_2, background=self.p.good)
@@ -212,52 +242,101 @@ class UI_Manager:
         self.over_frame.pack(fill="both", expand=True)
 
     def _build_menu(self) -> None:
-        left = ttk.Frame(self.menu_frame, style="Card.TFrame", padding=20)
-        left.pack(fill="both", expand=True)
+        self.menu_bg = tk.Canvas(self.menu_frame, highlightthickness=0, bd=0)
+        self.menu_bg.pack(fill="both", expand=True)
 
-        ttk.Label(left, text="ICD-10 Code Blue", style="Title.TLabel").pack(anchor="w")
+        card = ttk.Frame(self.menu_bg, style="Card.TFrame", padding=(24, 22))
+        card.columnconfigure(0, weight=1)
+        self.menu_card_window_id = self.menu_bg.create_window(0, 0, window=card, anchor="center", width=440)
+
+        def rounded_rect(canvas: tk.Canvas, x0: int, y0: int, x1: int, y1: int, r: int, *, fill: str, outline: str = "", width: int = 1, tags: str = "") -> None:
+            r = max(0, min(r, (x1 - x0) // 2, (y1 - y0) // 2))
+            canvas.create_rectangle(x0 + r, y0, x1 - r, y1, fill=fill, outline=outline, width=width, tags=tags)
+            canvas.create_rectangle(x0, y0 + r, x1, y1 - r, fill=fill, outline=outline, width=width, tags=tags)
+            canvas.create_oval(x0, y0, x0 + 2 * r, y0 + 2 * r, fill=fill, outline=outline, width=width, tags=tags)
+            canvas.create_oval(x1 - 2 * r, y0, x1, y0 + 2 * r, fill=fill, outline=outline, width=width, tags=tags)
+            canvas.create_oval(x0, y1 - 2 * r, x0 + 2 * r, y1, fill=fill, outline=outline, width=width, tags=tags)
+            canvas.create_oval(x1 - 2 * r, y1 - 2 * r, x1, y1, fill=fill, outline=outline, width=width, tags=tags)
+
+        def draw_menu_bg(_e: tk.Event | None = None) -> None:
+            c = self.menu_bg
+            c.delete("bg")
+            w = max(1, c.winfo_width())
+            h = max(1, c.winfo_height())
+
+            top = (183, 222, 247)
+            bottom = (246, 251, 255)
+            steps = 80
+            for i in range(steps):
+                t = i / max(1, steps - 1)
+                r = int(top[0] * (1 - t) + bottom[0] * t)
+                g = int(top[1] * (1 - t) + bottom[1] * t)
+                b = int(top[2] * (1 - t) + bottom[2] * t)
+                y0 = int((h * i) / steps)
+                y1 = int((h * (i + 1)) / steps)
+                c.create_rectangle(0, y0, w, y1, fill=f"#{r:02x}{g:02x}{b:02x}", outline="", tags="bg")
+
+            c.create_oval(-80, h - 180, w * 0.55, h + 120, fill="#ffffff", outline="", tags="bg")
+            c.create_oval(w * 0.20, h - 210, w * 1.15, h + 110, fill="#ffffff", outline="", tags="bg")
+            c.create_oval(w * 0.05, h - 140, w * 0.85, h + 140, fill="#ffffff", outline="", tags="bg")
+
+            c.coords(self.menu_card_window_id, w / 2, h * 0.48)
+            c.tag_lower("bg")
+
+            # Rounded card behind the ttk content (white, very light border)
+            c.delete("card")
+            card_w = 468
+            card_h = 452
+            x0 = int((w - card_w) / 2)
+            y0 = int((h * 0.48) - (card_h / 2))
+            x1 = x0 + card_w
+            y1 = y0 + card_h
+            rounded_rect(c, x0 + 5, y0 + 8, x1 + 5, y1 + 8, 22, fill="#dfeaf6", outline="", width=0, tags="card")
+            # No visible outline; rely on shadow + rounded corners.
+            rounded_rect(c, x0, y0, x1, y1, 22, fill="#ffffff", outline="", width=0, tags="card")
+            c.tag_raise("card")
+
+        self.menu_bg.bind("<Configure>", draw_menu_bg)
+        draw_menu_bg()
+
+        ttk.Label(card, text="ICD-10 Code Blue", style="HUD.TLabel", font=("Helvetica", 16, "bold")).grid(
+            row=0, column=0, sticky="ew"
+        )
         ttk.Label(
-            left,
+            card,
             text="Emergency coding challenge. Diagnose fast, stay accurate, and keep the patient stable.",
             style="Muted.TLabel",
-            wraplength=820,
-            justify="left",
-        ).pack(anchor="w", pady=(6, 16))
+            wraplength=390,
+            justify="center",
+        ).grid(row=1, column=0, sticky="ew", pady=(6, 14))
 
-        user_row = ttk.Frame(left, style="Panel.TFrame")
-        user_row.pack(fill="x", pady=(0, 12))
-        ttk.Label(user_row, text="Username", style="HUD.TLabel").pack(side="left")
+        form = ttk.Frame(card, style="Panel.TFrame")
+        form.grid(row=2, column=0, sticky="ew")
+        form.columnconfigure(0, weight=1)
+
+        ttk.Label(form, text="Username", style="Muted.TLabel").grid(row=0, column=0, sticky="w")
         self.username_var = tk.StringVar(value="")
-        self.username_entry = ttk.Entry(user_row, textvariable=self.username_var, width=28)
-        self.username_entry.pack(side="left", padx=(10, 0))
-        ttk.Button(user_row, text="Set", command=self._on_set_username, style="Small.TButton").pack(side="left", padx=(8, 0))
-
-        btns = ttk.Frame(left)
-        btns.pack(anchor="w")
-
-        ttk.Button(btns, text="Start Game", command=self.start_game, style="Game.TButton").grid(
-            row=0, column=0, padx=(0, 10), pady=6, sticky="w"
-        )
-        ttk.Button(btns, text="Quit", command=self.root.destroy, style="Game.TButton").grid(
-            row=0, column=1, pady=6, sticky="w"
+        self.username_entry = ttk.Entry(form, textvariable=self.username_var)
+        self.username_entry.grid(row=1, column=0, sticky="ew", pady=(4, 8))
+        ttk.Button(form, text="Set", command=self._on_set_username, style="MenuPrimary.TButton").grid(
+            row=2, column=0, sticky="ew"
         )
 
-        how = ttk.Labelframe(left, text="How to play", padding=12)
-        how.pack(fill="x", pady=(16, 0))
+        ttk.Button(card, text="Start Game", command=self.start_game, style="MenuPrimary.TButton").grid(
+            row=3, column=0, sticky="ew", pady=(14, 8)
+        )
+
+        ttk.Button(card, text="Quit", command=self.root.destroy, style="MenuQuit.TButton").grid(
+            row=4, column=0, sticky="ew"
+        )
+
         ttk.Label(
-            how,
-            text="- Search the handbook on the right.\n- Choose a method: Type or Select.\n- Submit before time runs out.\n- Keep stability above 0 to avoid CODE BLUE.",
-            style="Muted.TLabel",
-            justify="left",
-        ).pack(anchor="w")
-        stats_strip = ttk.Frame(left, style="Panel.TFrame", padding=(12, 10))
-        stats_strip.pack(fill="x", pady=(12, 0))
-        ttk.Label(stats_strip, text="Game vibe", style="HUD.TLabel").pack(anchor="w")
-        ttk.Label(
-            stats_strip,
-            text="Fast rounds  |  Live pressure monitor  |  End-run analytics",
+            card,
+            text="How to play: Search handbook • Choose Type/Select • Submit before time runs out",
             style="Subtle.TLabel",
-        ).pack(anchor="w", pady=(4, 0))
+            wraplength=390,
+            justify="center",
+        ).grid(row=5, column=0, sticky="ew", pady=(16, 0))
 
     def _on_set_username(self) -> None:
         self.current_username = (self.username_var.get() or "").strip()

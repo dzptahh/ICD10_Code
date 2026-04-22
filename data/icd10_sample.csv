@@ -1,0 +1,20 @@
+code,description,category
+I21.9,Acute myocardial infarction,Cardiology
+I20.0,Unstable angina,Cardiology
+I48.91,Atrial fibrillation,Cardiology
+J45.909,Asthma,Respiratory
+J18.9,Pneumonia,Respiratory
+J96.00,Acute respiratory failure,Respiratory
+A41.9,Sepsis,Infectious
+N39.0,Urinary tract infection,Infectious
+J02.9,Acute pharyngitis,Infectious
+K21.9,Gastro-esophageal reflux disease,Gastroenterology
+K52.9,Noninfective gastroenteritis and colitis,Gastroenterology
+K80.20,Calculus of gallbladder without cholecystitis,Gastroenterology
+I63.9,Cerebral infarction,Neurology
+G43.909,Migraine,Neurology
+G20,Parkinson disease,Neurology
+E11.9,Type 2 diabetes mellitus,Endocrinology
+E03.9,Hypothyroidism,Endocrinology
+E05.90,Hyperthyroidism,Endocrinology
+

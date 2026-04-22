@@ -1,0 +1,4 @@
+ts_utc,event,case_code,case_category,entered_code,correct,time_remaining_s,stability,score
+2026-04-22T06:51:48Z,case_start,N39.0,Infectious,,0,30,100,0
+2026-04-22T06:52:03Z,submit,N39.0,Infectious,G03,0,16,52,-25
+2026-04-22T06:52:08Z,game_over:ended,N39.0,Infectious,,0,11,42,-25

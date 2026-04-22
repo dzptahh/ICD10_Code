@@ -1,0 +1,13 @@
+timestamp,response_time,keystrokes,accuracy,category,remaining_time,time_limit,code,entered_code,keystroke_efficiency,score,stability
+2026-04-22T06:57:39Z,26,1,0,Gastroenterology,4,30,K21.9,K80.2,0.200,-25,28
+2026-04-22T07:03:10Z,11,0,0,Cardiology,19,30,I21.9,K21.9,0.000,-25,58
+2026-04-22T07:03:14Z,15,0,1,Cardiology,15,30,I21.9,I21.9,0.000,100,50
+2026-04-22T07:03:15Z,1,0,0,Endocrinology,29,30,E03.9,,0.000,75,28
+2026-04-22T07:03:18Z,4,0,0,Endocrinology,26,30,E03.9,E11.9,0.000,50,2
+2026-04-22T07:04:17Z,11,0,0,Neurology,19,30,G20,I21.9,0.000,-25,58
+2026-04-22T07:04:24Z,18,0,0,Neurology,12,30,G20,A41.9,0.000,-50,24
+2026-04-22T07:04:25Z,19,0,0,Neurology,11,30,G20,A41.9,0.000,-75,2
+2026-04-22T07:08:56Z,28,6,0,Neurology,2,30,I63.9,J96.00,1.200,-25,24
+2026-04-22T07:14:29Z,18,0,0,Respiratory,30,30,J18.9,J02.9,0.000,-25,80
+2026-04-22T07:14:34Z,23,0,1,Respiratory,30,30,J18.9,J18.9,0.000,100,80
+2026-04-22T07:15:05Z,6,0,1,Neurology,30,30,G20,G20,0.000,225,80

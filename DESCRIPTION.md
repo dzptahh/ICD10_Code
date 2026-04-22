@@ -26,9 +26,59 @@ ICD-10 coding is essential for healthcare documentation, but learning it is diff
 - **Proposal (PDF):**  
 [ICD-10 Code Blue Proposal](./ICD-10_Code_Blue.pdf)
 - **YouTube Presentation (~7 minutes):**  
-Video link here: `[YouTube Presentation](PASTE_YOUTUBE_LINK)`  
+Video link here: `[YouTube Presentation](PASTE_YOUTUBE_LINK)`
 
+![Login1](screenshots/gameplay/Setup_Login.png) 
+> [!NOTE]
+> The initial screen where users enter their username and start the ICD-10 coding challenge. It provides basic navigation options and a brief overview of the gameplay.
 
+![Login2](screenshots/gameplay/Login_Require_Name.png) 
+> [!NOTE]
+> If the user clicks the *Start Game* button without entering a username, the system prompts them to input a username before proceeding.
+
+![Login2](screenshots/gameplay/Login_Reminder.png) 
+> [!NOTE]
+>  If the user clicks the *Set* button without entering a username, a warning message appears requiring the user to enter a username.
+
+![Diagnosis Preview](screenshots/gameplay/Diagnose_15sec.png) 
+> [!NOTE]
+> A 15-second screen showing patient symptoms, allowing users to review and prepare their diagnosis before gameplay begins.
+
+### Each round has a **30-second time limit**, adding pressure to diagnose quickly and accurately.
+
+![Initial Gameplay](screenshots/gameplay/Setup_Gameplay.png) 
+> [!NOTE]
+> The main game interface where users analyze patient cases and submit ICD-10 codes under time pressure, using either direct input or handbook search.
+
+![Handbook Search Feature](screenshots/gameplay/Search_Handbook.png) 
+> [!NOTE]
+> Users can search for ICD-10 codes by entering keywords (e.g., “Gestational”) in the medical handbook panel. The system displays a list of matching codes with descriptions and categories. Users can then double-click a result to select the correct code for submission.
+
+![Incorrect Submission Feedback](screenshots/gameplay/Wrong_Answer.png) 
+> [!NOTE]
+> When a user submits an incorrect ICD-10 code, a warning message is displayed and points are deducted as a penalty.
+---
+
+### Visualization
+![Response Time Improvement](screenshots/visualization/Response_Time_Improvement.png) 
+> [!NOTE]
+> A line graph showing how the user’s response time improves across attempts, helping track speed and learning progress over time.
+
+![Error Distribution](screenshots/visualization/Error_Distribution.png) 
+> [!NOTE]
+> A histogram displaying the frequency of incorrect diagnoses, highlighting how often errors occur during gameplay.
+
+![Category Frequency](screenshots/visualization/Category_Frequency.png) 
+> [!NOTE]
+> A bar chart showing how frequently each ICD-10 category appears, giving insight into case distribution.
+
+![Accuracy Rate](screenshots/visualization/Accuracy_Rate.png) 
+> [!NOTE]
+> A pie chart illustrating the proportion of correct versus incorrect answers, providing an overview of user performance.
+
+![Response Time Distribution](screenshots/visualization/Response_Time_Distribution.png) 
+> [!NOTE]
+> A box plot showing the spread and variation of response times across attempts, helping identify consistency and outliers.
 ---
 
 ## 2. Concept

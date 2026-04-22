@@ -20,7 +20,7 @@ class GameState(str, Enum):
 class GameConfig:
     base_seconds_per_case: int = 30
     min_seconds_per_case: int = 12
-    difficulty_step_points: int = 300  # each N score reduces time limit
+    difficulty_step_points: int = 10  # each N score reduces time limit
     difficulty_step_seconds: int = 2
     wrong_streak_soften_at: int = 3
     wrong_streak_bonus_seconds: int = 2
@@ -59,7 +59,6 @@ class GameController:
         self.last_game_over_reason: str = ""
         self.last_case_answer: str = ""
         self._case_clock_started: bool = False
-        self._force_full_time_next_case: bool = False
 
     def load_cases(self, cases: list[PatientCase]) -> None:
         self._cases = list(cases)
@@ -113,9 +112,6 @@ class GameController:
         return c
 
     def _compute_time_limit(self) -> int:
-        if self._force_full_time_next_case:
-            self._force_full_time_next_case = False
-            return self.config.base_seconds_per_case
         steps = 0 if self.config.difficulty_step_points <= 0 else self.score // self.config.difficulty_step_points
         reduced = self.config.base_seconds_per_case - int(steps) * self.config.difficulty_step_seconds
         softened = reduced
@@ -230,8 +226,6 @@ class GameController:
             )
             answer = self._active_correct_code if not correct_desc else f"{self._active_correct_code} — {correct_desc}"
             msg = f"Correct: {answer}. +{self.config.points_correct + bonus} points."
-            # Game feel: a correct diagnosis resets next case timer to full.
-            self._force_full_time_next_case = True
             self._next_case()
             return True, msg
 

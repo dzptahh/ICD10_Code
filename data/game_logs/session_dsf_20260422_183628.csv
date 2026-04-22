@@ -1,0 +1,9 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T11:36:08Z,case_start,R10.9,Gastroenterology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T11:36:19Z,submit,R10.9,Gastroenterology,R10.9,1,11,4,5,0.800,19,30,78,125
+2026-04-22T11:36:21Z,case_start,J44.0,Respiratory,,0,0,0,5,0.000,30,30,78,125
+2026-04-22T11:36:23Z,submit,J44.0,Respiratory,M54.50,0,1,0,5,0.000,29,30,56,100
+2026-04-22T11:36:24Z,submit,J44.0,Respiratory,M79.672,0,2,0,5,0.000,28,30,34,75
+2026-04-22T11:36:26Z,submit,J44.0,Respiratory,R07.9,0,4,0,5,0.000,26,30,10,50
+2026-04-22T11:36:28Z,submit,J44.0,Respiratory,M25.562,0,6,0,5,0.000,24,30,0,25
+2026-04-22T11:36:28Z,game_over:stability,J44.0,Respiratory,,0,0,0,0,0.000,24,0,0,25

@@ -409,10 +409,20 @@ class UI_Manager:
         hud_right = ttk.Frame(top, style="Panel.TFrame")
         hud_right.pack(side="right")
 
+        time_wrap = ttk.Frame(hud_right, style="Panel.TFrame")
+        time_wrap.pack(side="right", padx=(0, 14))
+        # Keep timer display centered with the pressure monitor block.
+        time_wrap.configure(width=150, height=56)
+        try:
+            time_wrap.pack_propagate(False)
+        except Exception:
+            pass
+        ttk.Label(time_wrap, textvariable=self.time_var, style="HUD.TLabel").pack(anchor="center", pady=(16, 0))
+
         pressure_wrap = ttk.Frame(hud_right, style="Panel.TFrame")
         pressure_wrap.pack(side="right", padx=(0, 14))
         # Center the pressure HUD content within its box
-        pressure_wrap.configure(width=280)
+        pressure_wrap.configure(width=280, height=82)
         try:
             pressure_wrap.pack_propagate(False)
         except Exception:
@@ -645,8 +655,18 @@ class UI_Manager:
         self.chart_select.pack(side="left", padx=(8, 0))
         self.chart_select.bind("<<ComboboxSelected>>", lambda _e: self._render_game_over())
 
-        self.chart = tk.Canvas(chart_box, background="#ffffff", highlightthickness=1, highlightbackground=self.p.border)
-        self.chart.grid(row=1, column=0, sticky="nsew")
+        chart_area = ttk.Frame(chart_box, style="Panel.TFrame")
+        chart_area.grid(row=1, column=0, sticky="nsew")
+        chart_area.rowconfigure(0, weight=1)
+        chart_area.columnconfigure(0, weight=1)
+
+        self.chart = tk.Canvas(chart_area, background="#ffffff", highlightthickness=1, highlightbackground=self.p.border)
+        self.chart.grid(row=0, column=0, sticky="nsew")
+        self.chart_v_scroll = ttk.Scrollbar(chart_area, orient="vertical", command=self.chart.yview)
+        self.chart_v_scroll.grid(row=0, column=1, sticky="ns")
+        self.chart_h_scroll = ttk.Scrollbar(chart_area, orient="horizontal", command=self.chart.xview)
+        self.chart_h_scroll.grid(row=1, column=0, sticky="ew")
+        self.chart.configure(yscrollcommand=self.chart_v_scroll.set, xscrollcommand=self.chart_h_scroll.set)
         self.chart.bind("<Configure>", self._on_chart_resize)
 
         # Result actions are shown in header beside the RESULTS badge.
@@ -748,15 +768,29 @@ class UI_Manager:
         c.create_rectangle(x0 + (2 * zone_w), y0, x1, y1, fill="#ffe1e1", outline="")
 
         fill_x = x0 + ((x1 - x0) * pressure_ratio)
-        if pressure_pct <= 40:
-            fill_color = self.p.good
-        elif pressure_pct <= 75:
-            fill_color = self.p.warn
+        # Smooth pressure color: 0% -> green, 50% -> yellow, 100% -> red
+        if pressure_ratio <= 0.5:
+            t = pressure_ratio / 0.5
+            r = int(42 + (240 - 42) * t)
+            g = int(168 + (180 - 168) * t)
+            b = int(74 + (41 - 74) * t)
         else:
-            fill_color = self.p.bad
+            t = (pressure_ratio - 0.5) / 0.5
+            r = int(240 + (214 - 240) * t)
+            g = int(180 + (69 - 180) * t)
+            b = int(41 + (69 - 41) * t)
+        fill_color = f"#{r:02x}{g:02x}{b:02x}"
 
         c.create_rectangle(x0, y0, fill_x, y1, fill=fill_color, outline="")
         c.create_line(fill_x, y0 - 3, fill_x, y1 + 3, fill=self.p.text, width=2)
+        c.create_text(
+            x1 + 6,
+            (y0 + y1) / 2,
+            anchor="w",
+            text=f"{pressure_pct}%",
+            fill=fill_color,
+            font=("Helvetica", 10, "bold"),
+        )
 
         for tick in range(0, 101, 25):
             tx = x0 + ((x1 - x0) * (tick / 100))
@@ -972,7 +1006,16 @@ class UI_Manager:
         c.create_line(x0, y0, x0, y1, fill="#334155", width=2)
         c.create_text((x0 + x1) / 2, h - 18, anchor="s", text=x_label, fill="#334155", font=("Helvetica", 10))
         c.create_text(16, (y0 + y1) / 2, anchor="w", text=y_label, angle=90, fill="#334155", font=("Helvetica", 10))
+        self._update_chart_scrollregion()
         return x0, y0, x1, y1
+
+    def _update_chart_scrollregion(self) -> None:
+        if not hasattr(self, "chart") or not self.chart.winfo_exists():
+            return
+        self.chart.update_idletasks()
+        bbox = self.chart.bbox("all")
+        if bbox:
+            self.chart.configure(scrollregion=bbox)
 
     def _on_chart_resize(self, _e: tk.Event) -> None:
         # Debounce redraw to avoid heavy re-render during window resize.
@@ -1081,6 +1124,7 @@ class UI_Manager:
         recs = self.stats.submit_records()
         if not recs:
             c.create_text(w / 2, h / 2, text="No data yet.", fill="#777")
+            self._update_chart_scrollregion()
             return
 
         correct_n = sum(1 for r in recs if r.correct == 1)
@@ -1116,6 +1160,7 @@ class UI_Manager:
         c.create_text(lx + 20, ly + 7, anchor="w", text=f"Correct: {correct_pct:.0f}%", fill="#132033")
         c.create_rectangle(lx, ly + 26, lx + 14, ly + 40, fill="#d64545", outline="")
         c.create_text(lx + 20, ly + 33, anchor="w", text=f"Incorrect: {wrong_pct:.0f}%", fill="#132033")
+        self._update_chart_scrollregion()
 
     def _draw_response_time_box_plot(self) -> None:
         c = self.chart
@@ -1126,6 +1171,7 @@ class UI_Manager:
         rts = sorted(float(v) for v in self.stats.response_time_series())
         if len(rts) < 2:
             c.create_text(w / 2, h / 2, text="Not enough attempts yet.", fill="#777")
+            self._update_chart_scrollregion()
             return
 
         def q(vals: list[float], p: float) -> float:
@@ -1173,6 +1219,7 @@ class UI_Manager:
 
         for value, lbl in [(vmax, "max"), (q3, "q3"), (med, "median"), (q1, "q1"), (vmin, "min")]:
             c.create_text(center_x + box_w / 2 + 12, y_map(value), anchor="w", text=f"{lbl}: {value:.1f}s", fill="#132033")
+        self._update_chart_scrollregion()
 
     def _save_session_log(self) -> None:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")

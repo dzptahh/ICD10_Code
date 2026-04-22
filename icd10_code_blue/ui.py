@@ -145,6 +145,21 @@ class UI_Manager:
 
         self.state_badge = ttk.Label(self.header, text="", style="Badge.TLabel")
         self.state_badge.pack(side="right")
+        self.result_actions = ttk.Frame(self.header, style="Panel.TFrame")
+        self.result_actions.pack(side="right", padx=(0, 10))
+        self.result_play_btn = ttk.Button(
+            self.result_actions, text="Play Again", command=self.start_game, style="Small.TButton"
+        )
+        self.result_play_btn.pack(side="left")
+        self.result_menu_btn = ttk.Button(
+            self.result_actions, text="Main Menu", command=self.show_menu, style="Small.TButton"
+        )
+        self.result_menu_btn.pack(side="left", padx=(8, 0))
+        self.result_quit_btn = ttk.Button(
+            self.result_actions, text="Quit", command=self.root.destroy, style="Small.TButton"
+        )
+        self.result_quit_btn.pack(side="left", padx=(8, 0))
+        self.result_actions.pack_forget()
 
         self.body = ttk.Frame(self.container)
         self.body.pack(fill="both", expand=True, pady=(12, 0))
@@ -170,6 +185,7 @@ class UI_Manager:
         self._stop_timer()
         self._clear_body()
         self._set_badge("MENU")
+        self.result_actions.pack_forget()
         self.menu_frame.pack(fill="both", expand=True)
 
     def start_game(self) -> None:
@@ -181,6 +197,7 @@ class UI_Manager:
         self.controller.start_game()
         self._clear_body()
         self._set_badge("PLAYING")
+        self.result_actions.pack_forget()
         self.brief_frame.pack(fill="both", expand=True)
         self._begin_case_briefing()
         self._start_timer()
@@ -189,6 +206,7 @@ class UI_Manager:
         self._stop_timer()
         self._clear_body()
         self._set_badge("RESULTS")
+        self.result_actions.pack(side="right", padx=(0, 10))
         self._render_game_over()
         self.over_frame.pack(fill="both", expand=True)
 
@@ -545,12 +563,18 @@ class UI_Manager:
         controls = ttk.Frame(chart_box)
         controls.grid(row=0, column=0, sticky="ew", pady=(0, 10))
         ttk.Label(controls, text="Chart:").pack(side="left")
-        self.chart_mode = tk.StringVar(value="Error Histogram")
+        self.chart_mode = tk.StringVar(value="Response Time Improvement")
         self.chart_select = ttk.Combobox(
             controls,
             textvariable=self.chart_mode,
             state="readonly",
-            values=["Error Histogram", "Response Time Improvement", "Category Distribution"],
+            values=[
+                "Response Time Improvement",
+                "Error Distribution",
+                "Category Frequency",
+                "Accuracy Rate",
+                "Response Time Distribution",
+            ],
             width=28,
         )
         self.chart_select.pack(side="left", padx=(8, 0))
@@ -559,11 +583,7 @@ class UI_Manager:
         self.chart = tk.Canvas(chart_box, background="#ffffff", highlightthickness=1, highlightbackground=self.p.border)
         self.chart.grid(row=1, column=0, sticky="nsew")
 
-        bottom = ttk.Frame(self.over_frame)
-        bottom.pack(fill="x", pady=(12, 0))
-        ttk.Button(bottom, text="Play Again", command=self.start_game).pack(side="left")
-        ttk.Button(bottom, text="Back to Menu", command=self.show_menu).pack(side="left", padx=(10, 0))
-        ttk.Button(bottom, text="Quit", command=self.root.destroy).pack(side="right")
+        # Result actions are shown in header beside the RESULTS badge.
 
     def _start_timer(self) -> None:
         self._stop_timer()
@@ -858,9 +878,13 @@ class UI_Manager:
         mode = self.chart_mode.get().strip()
         if mode == "Response Time Improvement":
             self._draw_response_time_line()
-        elif mode == "Category Distribution":
+        elif mode == "Category Frequency":
             self._draw_category_distribution()
-        else:
+        elif mode == "Accuracy Rate":
+            self._draw_accuracy_pie()
+        elif mode == "Response Time Distribution":
+            self._draw_response_time_box_plot()
+        else:  # "Error Distribution"
             self._draw_error_histogram()
 
     def _canvas_dims(self) -> tuple[int, int]:
@@ -964,6 +988,106 @@ class UI_Manager:
             c.create_text((bx0 + bx1) / 2, by1 - 10, text=str(v), fill="#111")
             label = cat if len(cat) <= 10 else cat[:9] + "…"
             c.create_text((bx0 + bx1) / 2, y0 + 14, text=label, fill="#333")
+
+    def _draw_accuracy_pie(self) -> None:
+        c = self.chart
+        c.delete("all")
+        w, h = self._canvas_dims()
+        recs = self.stats.submit_records()
+        if not recs:
+            c.create_text(w / 2, h / 2, text="No data yet.", fill="#777")
+            return
+
+        correct_n = sum(1 for r in recs if r.correct == 1)
+        wrong_n = max(0, len(recs) - correct_n)
+        total = max(1, len(recs))
+        correct_pct = (correct_n / total) * 100
+        wrong_pct = 100 - correct_pct
+
+        c.create_text(12, 10, anchor="nw", text="Accuracy Rate", font=("Helvetica", 12, "bold"))
+        cx, cy, r = w * 0.42, h * 0.53, min(w, h) * 0.25
+
+        start = 90.0
+        extent_correct = -360.0 * (correct_n / total)
+        c.create_arc(cx - r, cy - r, cx + r, cy + r, start=start, extent=extent_correct, fill="#2aa84a", outline="")
+        c.create_arc(
+            cx - r,
+            cy - r,
+            cx + r,
+            cy + r,
+            start=start + extent_correct,
+            extent=-360.0 - extent_correct,
+            fill="#d64545",
+            outline="",
+        )
+
+        c.create_oval(cx - r * 0.52, cy - r * 0.52, cx + r * 0.52, cy + r * 0.52, fill="#ffffff", outline="")
+        c.create_text(cx, cy - 4, text=f"{correct_pct:.0f}% correct", fill="#132033", font=("Helvetica", 11, "bold"))
+        c.create_text(cx, cy + 14, text=f"{correct_n}/{total}", fill="#5f6f86", font=("Helvetica", 10))
+
+        lx = w * 0.72
+        ly = h * 0.42
+        c.create_rectangle(lx, ly, lx + 14, ly + 14, fill="#2aa84a", outline="")
+        c.create_text(lx + 20, ly + 7, anchor="w", text=f"Correct: {correct_pct:.0f}%", fill="#132033")
+        c.create_rectangle(lx, ly + 26, lx + 14, ly + 40, fill="#d64545", outline="")
+        c.create_text(lx + 20, ly + 33, anchor="w", text=f"Incorrect: {wrong_pct:.0f}%", fill="#132033")
+
+    def _draw_response_time_box_plot(self) -> None:
+        c = self.chart
+        c.delete("all")
+        w, h = self._canvas_dims()
+        c.create_text(12, 10, anchor="nw", text="Response Time Distribution (Box Plot)", font=("Helvetica", 12, "bold"))
+
+        rts = sorted(float(v) for v in self.stats.response_time_series())
+        if len(rts) < 2:
+            c.create_text(w / 2, h / 2, text="Not enough attempts yet.", fill="#777")
+            return
+
+        def q(vals: list[float], p: float) -> float:
+            if not vals:
+                return 0.0
+            idx = (len(vals) - 1) * p
+            lo = int(idx)
+            hi = min(lo + 1, len(vals) - 1)
+            frac = idx - lo
+            return vals[lo] * (1.0 - frac) + vals[hi] * frac
+
+        vmin = rts[0]
+        q1 = q(rts, 0.25)
+        med = q(rts, 0.50)
+        q3 = q(rts, 0.75)
+        vmax = rts[-1]
+
+        x0, y0, x1, y1 = 70, h - 56, w - 40, 54
+        c.create_line(x0, y0, x1, y0, fill="#333")
+        c.create_text((x0 + x1) / 2, h - 12, text="Attempts", fill="#333")
+        c.create_text(16, (y0 + y1) / 2, text="Response Time (s)", angle=90, fill="#333")
+
+        max_v = max(1.0, vmax)
+
+        def y_map(v: float) -> float:
+            return y0 - (y0 - y1) * (v / max_v)
+
+        center_x = (x0 + x1) / 2
+        box_w = min(120, (x1 - x0) * 0.25)
+
+        y_min = y_map(vmin)
+        y_q1 = y_map(q1)
+        y_med = y_map(med)
+        y_q3 = y_map(q3)
+        y_max = y_map(vmax)
+
+        c.create_line(center_x, y_max, center_x, y_q3, fill="#2d6cdf", width=2)
+        c.create_line(center_x, y_q1, center_x, y_min, fill="#2d6cdf", width=2)
+        c.create_rectangle(center_x - box_w / 2, y_q3, center_x + box_w / 2, y_q1, fill="#dbe8ff", outline="#2d6cdf", width=2)
+        c.create_line(center_x - box_w / 2, y_med, center_x + box_w / 2, y_med, fill="#132033", width=2)
+
+        cap_w = box_w * 0.55
+        c.create_line(center_x - cap_w / 2, y_max, center_x + cap_w / 2, y_max, fill="#2d6cdf", width=2)
+        c.create_line(center_x - cap_w / 2, y_min, center_x + cap_w / 2, y_min, fill="#2d6cdf", width=2)
+
+        for value, lbl in [(vmax, "max"), (q3, "q3"), (med, "median"), (q1, "q1"), (vmin, "min")]:
+            c.create_text(center_x + box_w / 2 + 12, y_map(value), anchor="w", text=f"{lbl}: {value:.1f}s", fill="#132033")
 
     def _save_session_log(self) -> None:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")

@@ -1,0 +1,7 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T07:46:37Z,case_start,H66.90,ENT,,0,0,0,6,0.000,30,30,100,0
+2026-04-22T07:46:50Z,submit,H66.90,ENT,R09.81,0,12,0,6,0.000,17,30,54,-25
+2026-04-22T07:46:52Z,submit,H66.90,ENT,I34.0,0,15,0,6,0.000,15,30,30,-50
+2026-04-22T07:46:54Z,submit,H66.90,ENT,N20.0,0,17,0,6,0.000,12,30,4,-75
+2026-04-22T07:46:56Z,game_over:stability,H66.90,ENT,,0,0,0,0,0.000,10,0,0,-75
+2026-04-22T07:46:56Z,log_saved,,,TangTang::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_TangTang_20260422_144656.csv,0,0,0,0,0.000,10,30,0,-75

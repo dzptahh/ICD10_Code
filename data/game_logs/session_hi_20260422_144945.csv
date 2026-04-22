@@ -1,0 +1,5 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T07:49:15Z,case_start,K58.9,Gastroenterology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T07:49:32Z,submit,K58.9,Gastroenterology,R11.2,0,16,0,5,0.000,13,30,46,-25
+2026-04-22T07:49:39Z,submit,K58.9,Gastroenterology,N39.0,0,23,0,5,0.000,6,30,12,-50
+2026-04-22T07:49:45Z,game_over:timeout,K58.9,Gastroenterology,,0,0,0,0,0.000,0,0,0,-50

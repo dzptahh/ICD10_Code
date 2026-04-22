@@ -1,0 +1,8 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T11:42:19Z,case_start,J32.9,Respiratory,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T11:42:26Z,submit,J32.9,Respiratory,R49.0,0,7,0,5,0.000,21,30,66,-25
+2026-04-22T11:42:28Z,submit,J32.9,Respiratory,R49.0,0,8,0,5,0.000,17,30,42,-50
+2026-04-22T11:42:30Z,submit,J32.9,Respiratory,R49.0,0,10,0,5,0.000,13,30,18,-75
+2026-04-22T11:42:38Z,submit,J32.9,Respiratory,J32.9,1,19,0,5,0.000,5,30,2,25
+2026-04-22T11:42:39Z,case_start,N20.0,Nephrology,,0,0,0,5,0.000,30,30,2,25
+2026-04-22T11:42:40Z,game_over:stability,N20.0,Nephrology,,0,0,0,0,0.000,29,0,0,25

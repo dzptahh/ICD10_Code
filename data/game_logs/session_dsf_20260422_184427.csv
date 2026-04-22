@@ -1,0 +1,8 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T11:43:51Z,case_start,B34.9,Infectious,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T11:44:01Z,submit,B34.9,Infectious,B34.9,1,10,0,5,0.000,19,30,78,125
+2026-04-22T11:44:03Z,case_start,N30.00,Infectious,,0,0,0,6,0.000,30,30,78,125
+2026-04-22T11:44:06Z,submit,N30.00,Infectious,A15.9,0,2,0,6,0.000,25,30,52,100
+2026-04-22T11:44:08Z,submit,N30.00,Infectious,J32.9,0,4,0,6,0.000,22,30,30,75
+2026-04-22T11:44:10Z,submit,N30.00,Infectious,I95.9,0,6,0,6,0.000,18,30,6,50
+2026-04-22T11:44:27Z,game_over:timeout,N30.00,Infectious,,0,0,0,0,0.000,0,0,0,50

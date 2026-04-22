@@ -22,6 +22,7 @@ class GameConfig:
     min_seconds_per_case: int = 12
     difficulty_step_points: int = 10  # each N score reduces time limit
     difficulty_step_seconds: int = 2
+    time_penalty_wrong_submit_s: int = 2
     wrong_streak_soften_at: int = 3
     wrong_streak_bonus_seconds: int = 2
     max_stability: int = 100
@@ -112,12 +113,8 @@ class GameController:
         return c
 
     def _compute_time_limit(self) -> int:
-        steps = 0 if self.config.difficulty_step_points <= 0 else self.score // self.config.difficulty_step_points
-        reduced = self.config.base_seconds_per_case - int(steps) * self.config.difficulty_step_seconds
-        softened = reduced
-        if self._wrong_streak >= self.config.wrong_streak_soften_at:
-            softened += self.config.wrong_streak_bonus_seconds
-        return max(self.config.min_seconds_per_case, softened)
+        # Fixed per-case timer: each new symptom starts with full base time.
+        return self.config.base_seconds_per_case
 
     def _next_case(self) -> None:
         if not self.db.entries:
@@ -189,8 +186,8 @@ class GameController:
         self.time_remaining = max(0, self.time_remaining - 1)
         self.stability = max(0, self.stability - self.config.stability_decay_per_second)
 
-        if self.time_remaining <= 0 or self.stability <= 0:
-            self.end_game(reason="timeout" if self.time_remaining <= 0 else "stability")
+        if self.time_remaining <= 0:
+            self.end_game(reason="timeout")
 
     def submit_code(self, entered_code: str, *, keystrokes: int = 0) -> tuple[bool, str]:
         if self.game_state != GameState.PLAYING or not self._active_correct_code:
@@ -231,6 +228,7 @@ class GameController:
 
         self._wrong_streak += 1
         self.score += self.config.points_wrong
+        self.time_remaining = max(0, self.time_remaining - self.config.time_penalty_wrong_submit_s)
         self.stability = max(0, self.stability - self.config.stability_penalty_wrong)
         self.stats.log_attempt(
             event="submit",
@@ -246,9 +244,9 @@ class GameController:
             stability=self.stability,
             score=self.score,
         )
-        if self.stability <= 0:
-            self.end_game(reason="stability")
-            return False, "Wrong. Patient coded blue."
+        if self.time_remaining <= 0:
+            self.end_game(reason="timeout")
+            return False, "Wrong. Time is up."
         return False, f"Wrong. -{abs(self.config.points_wrong)} points. Review the correct code in final results."
 
     def skip_case(self) -> None:
@@ -273,9 +271,6 @@ class GameController:
             stability=self.stability,
             score=self.score,
         )
-        if self.stability <= 0:
-            self.end_game(reason="stability")
-            return
         self._next_case()
 
     def end_game(self, *, reason: str) -> None:

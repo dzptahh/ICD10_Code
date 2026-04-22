@@ -1,0 +1,14 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T11:46:04Z,case_start,I50.9,Cardiology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T11:46:19Z,submit,I50.9,Cardiology,I50.9,1,15,6,5,1.200,15,30,70,125
+2026-04-22T11:46:20Z,case_start,S52.501A,Orthopedics,,0,0,0,8,0.000,30,30,70,125
+2026-04-22T11:46:23Z,submit,S52.501A,Orthopedics,I50.22,0,3,0,8,0.000,25,30,44,100
+2026-04-22T11:46:25Z,submit,S52.501A,Orthopedics,R07.9,0,4,0,8,0.000,22,30,22,75
+2026-04-22T11:46:26Z,submit,S52.501A,Orthopedics,R07.9,0,6,0,8,0.000,18,30,0,50
+2026-04-22T11:46:26Z,submit,S52.501A,Orthopedics,R07.9,0,6,0,8,0.000,16,30,0,25
+2026-04-22T11:46:27Z,submit,S52.501A,Orthopedics,R07.9,0,6,0,8,0.000,14,30,0,0
+2026-04-22T11:46:27Z,submit,S52.501A,Orthopedics,R07.9,0,6,0,8,0.000,12,30,0,-25
+2026-04-22T11:46:27Z,submit,S52.501A,Orthopedics,R07.9,0,6,0,8,0.000,9,30,0,-50
+2026-04-22T11:46:27Z,submit,S52.501A,Orthopedics,R07.9,0,7,0,8,0.000,7,30,0,-75
+2026-04-22T11:46:28Z,submit,S52.501A,Orthopedics,R07.9,0,7,0,8,0.000,5,30,0,-100
+2026-04-22T11:46:32Z,game_over:timeout,S52.501A,Orthopedics,,0,0,0,0,0.000,0,0,0,-100

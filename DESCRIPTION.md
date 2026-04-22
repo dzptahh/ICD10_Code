@@ -20,11 +20,11 @@ ICD-10 coding is essential for healthcare documentation, but learning it is diff
   - Automatic session logging to CSV  
   - Post-game statistics dashboard with multiple chart types
 - **Screenshots:**  
-  - Game interface: `screenshots/game_ui.png`  
-  - Statistics dashboard: `screenshots/stats_ui.png`  
+  - Game interface: `screenshots/gameplay`  
+  - Statistics dashboard: `screenshots/visualization`  
   - Full screenshot folder: [screenshots/](screenshots/)
 - **Proposal (PDF):**  
-[ICD-10 Code Blue Proposal](./ICD-10_Code_Blue.pdf)
+[ICD-10 Code Blue Proposal](./ICD-10 Code Blue Danita.pdf)
 - **YouTube Presentation (~7 minutes):**  
 Video link here: `[YouTube Presentation](PASTE_YOUTUBE_LINK)`
 

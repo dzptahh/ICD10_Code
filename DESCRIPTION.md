@@ -27,23 +27,13 @@
 
 - **Screenshots:**
 
-  > 📸 *(Add your screenshots here — place image files in a `screenshots/` folder in the repo)*
-  >
-  > ```markdown
-  > ![Gameplay Screenshot](screenshots/gameplay.png)
-  > ![Statistics Dashboard](screenshots/stats_dashboard.png)
-  > ```
+  > 📸 *(later)*
 
 - **Proposal:**
-  📄 [View Project Proposal (PDF)](proposal.pdf)
+  📄 later
 
 - **YouTube Presentation:**
-  🎥 *(Add your YouTube link here — approx. 7 minutes)*
-
-  > The presentation covers:
-  > 1. A short intro and full demonstration of the game and statistics features
-  > 2. An explanation of the class design and its usage
-  > 3. An explanation of the statistics and data visualizations
+  🎥 *(later)*
 
 ---
 
@@ -75,13 +65,13 @@ Additionally, I have always had a strong personal interest in biology, which mad
 > - All classes with attributes and methods
 > - Relationships such as association and inheritance
 >
-> **Attachment:** [UML Class Diagram (PDF)](uml_class_diagram.pdf)
+> **Attachment:** later
 
 ---
 
 ## 4. Object-Oriented Programming Implementation
 
-> *(Placeholders — update with your actual class names and descriptions from your code)*
+> *(add more later)*
 
 | Class | Description |
 |-------|-------------|
@@ -113,13 +103,7 @@ The following five graphs are generated from the recorded session data:
 
 ---
 
-## 6. Changed Proposed Features
-
-> *(Skip for now — fill in here if any features differ from the original proposal)*
-
----
-
-## 7. External Sources
+## 6. External Sources
 
 ### Data
 
@@ -137,7 +121,3 @@ The following five graphs are generated from the recorded session data:
 | `matplotlib` | Data visualization / graphs | PSF |
 | `rich` | Terminal UI and styled output | MIT |
 | `colorama` | Cross-platform terminal color support | BSD |
-
-### Other Assets
-
-> *(Add any music, images, or artwork used here, with author name, source link, and license)*

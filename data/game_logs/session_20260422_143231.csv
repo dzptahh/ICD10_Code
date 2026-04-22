@@ -1,0 +1,7 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T07:32:00Z,case_start,E03.9,Endocrinology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T07:32:17Z,submit,E03.9,Endocrinology,J45.909,0,16,0,5,0.000,13,30,46,-25
+2026-04-22T07:32:24Z,submit,E03.9,Endocrinology,E05.90,0,24,0,5,0.000,5,30,10,-50
+2026-04-22T07:32:26Z,submit,E03.9,Endocrinology,E03.9,1,26,0,5,0.000,3,30,6,50
+2026-04-22T07:32:29Z,case_start,E11.9,Endocrinology,,0,0,0,5,0.000,30,30,6,50
+2026-04-22T07:32:31Z,game_over:stability,E11.9,Endocrinology,,0,0,0,0,0.000,27,0,0,50

@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Callable
 
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+from tkinter import ttk, messagebox, filedialog, simpledialog
 
 from .controller import GameController, GameState
 from .icd_database import ICDEntry
@@ -21,12 +21,13 @@ class UIStrings:
 
 @dataclass(frozen=True)
 class Palette:
-    bg: str = "#0b1020"
-    panel: str = "#121a33"
-    panel_2: str = "#0f1730"
-    text: str = "#e6e9f2"
-    muted: str = "#a8b0c4"
-    accent: str = "#2f6fed"
+    bg: str = "#f4f7fb"
+    panel: str = "#ffffff"
+    panel_2: str = "#edf2f8"
+    text: str = "#132033"
+    muted: str = "#5f6f86"
+    accent: str = "#2d6cdf"
+    border: str = "#d8e1ec"
     good: str = "#2aa84a"
     warn: str = "#f0b429"
     bad: str = "#d64545"
@@ -56,6 +57,7 @@ class UI_Manager:
         self.root.configure(background=self.p.bg)
 
         self._timer_job: str | None = None
+        self.current_username: str = ""
 
         self._build_layout()
         self.show_menu()
@@ -67,27 +69,75 @@ class UI_Manager:
         except tk.TclError:
             pass
 
-        # Base theme (dark, game-like)
+        # Base theme (modern light UI)
         self.style.configure("TFrame", background=self.p.bg)
         self.style.configure("TLabel", background=self.p.bg, foreground=self.p.text)
         self.style.configure("Muted.TLabel", background=self.p.bg, foreground=self.p.muted)
         self.style.configure("Panel.TFrame", background=self.p.panel)
         self.style.configure("Panel.TLabel", background=self.p.panel, foreground=self.p.text)
         self.style.configure("Title.TLabel", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 22, "bold"))
-        self.style.configure("Badge.TLabel", background=self.p.panel_2, foreground=self.p.text, padding=(10, 4), font=("Helvetica", 11, "bold"))
+        self.style.configure(
+            "Badge.TLabel",
+            background=self.p.panel_2,
+            foreground=self.p.accent,
+            padding=(10, 4),
+            font=("Helvetica", 10, "bold"),
+        )
         self.style.configure("HUD.TLabel", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 11, "bold"))
+        self.style.configure("Card.TFrame", background=self.p.panel, borderwidth=1, relief="solid")
 
-        self.style.configure("Game.TButton", font=("Helvetica", 12, "bold"), padding=(14, 10))
-        self.style.configure("Small.TButton", font=("Helvetica", 10, "bold"), padding=(10, 6))
+        self.style.configure("TLabelframe", background=self.p.panel, borderwidth=1, relief="solid")
+        self.style.configure("TLabelframe.Label", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 11, "bold"))
+        self.style.configure("TEntry", fieldbackground="#ffffff", foreground=self.p.text, bordercolor=self.p.border, padding=6)
+        self.style.map("TEntry", bordercolor=[("focus", self.p.accent)])
+
+        self.style.configure(
+            "TCombobox",
+            fieldbackground="#ffffff",
+            foreground=self.p.text,
+            bordercolor=self.p.border,
+            arrowsize=14,
+            padding=4,
+        )
+        self.style.map("TCombobox", bordercolor=[("focus", self.p.accent)])
+
+        self.style.configure("Game.TButton", font=("Helvetica", 11, "bold"), padding=(14, 9), borderwidth=0)
+        self.style.map(
+            "Game.TButton",
+            background=[("active", "#245dca"), ("!disabled", self.p.accent)],
+            foreground=[("!disabled", "#ffffff")],
+        )
+        self.style.configure("Small.TButton", font=("Helvetica", 10, "bold"), padding=(10, 6), borderwidth=0)
+        self.style.map(
+            "Small.TButton",
+            background=[("active", "#245dca"), ("!disabled", self.p.accent)],
+            foreground=[("!disabled", "#ffffff")],
+        )
 
         self.style.configure("Green.Horizontal.TProgressbar", troughcolor=self.p.panel_2, background=self.p.good)
         self.style.configure("Yellow.Horizontal.TProgressbar", troughcolor=self.p.panel_2, background=self.p.warn)
         self.style.configure("Red.Horizontal.TProgressbar", troughcolor=self.p.panel_2, background=self.p.bad)
+        self.style.configure(
+            "Treeview",
+            background="#ffffff",
+            fieldbackground="#ffffff",
+            foreground=self.p.text,
+            rowheight=26,
+            bordercolor=self.p.border,
+        )
+        self.style.configure(
+            "Treeview.Heading",
+            background=self.p.panel_2,
+            foreground=self.p.text,
+            font=("Helvetica", 10, "bold"),
+            relief="flat",
+        )
+        self.style.map("Treeview", background=[("selected", "#dbe8ff")], foreground=[("selected", self.p.text)])
 
         self.container = ttk.Frame(self.root, padding=16)
         self.container.pack(fill="both", expand=True)
 
-        self.header = ttk.Frame(self.container, style="Panel.TFrame", padding=(12, 10))
+        self.header = ttk.Frame(self.container, style="Panel.TFrame", padding=(14, 12))
         self.header.pack(fill="x")
 
         self.title_lbl = ttk.Label(self.header, text=self.s.title, style="Title.TLabel")
@@ -123,6 +173,11 @@ class UI_Manager:
         self.menu_frame.pack(fill="both", expand=True)
 
     def start_game(self) -> None:
+        if not self.current_username.strip():
+            self._prompt_username()
+            if not self.current_username.strip():
+                messagebox.showwarning("Username required", "Please enter your username to start the run.")
+                return
         self.controller.start_game()
         self._clear_body()
         self._set_badge("PLAYING")
@@ -138,7 +193,7 @@ class UI_Manager:
         self.over_frame.pack(fill="both", expand=True)
 
     def _build_menu(self) -> None:
-        left = ttk.Frame(self.menu_frame, style="Panel.TFrame", padding=18)
+        left = ttk.Frame(self.menu_frame, style="Card.TFrame", padding=20)
         left.pack(fill="both", expand=True)
 
         ttk.Label(left, text="Medical coding under pressure.", style="HUD.TLabel").pack(anchor="w")
@@ -149,6 +204,14 @@ class UI_Manager:
             wraplength=820,
             justify="left",
         ).pack(anchor="w", pady=(6, 18))
+
+        user_row = ttk.Frame(left, style="Panel.TFrame")
+        user_row.pack(fill="x", pady=(0, 12))
+        ttk.Label(user_row, text="Username", style="HUD.TLabel").pack(side="left")
+        self.username_var = tk.StringVar(value="")
+        self.username_entry = ttk.Entry(user_row, textvariable=self.username_var, width=28)
+        self.username_entry.pack(side="left", padx=(10, 0))
+        ttk.Button(user_row, text="Set", command=self._on_set_username, style="Small.TButton").pack(side="left", padx=(8, 0))
 
         btns = ttk.Frame(left)
         btns.pack(anchor="w")
@@ -175,6 +238,26 @@ class UI_Manager:
         self.cases_status = tk.StringVar(value="Cases: (using auto-generated symptoms)")
         ttk.Label(left, textvariable=self.cases_status, style="Muted.TLabel").pack(anchor="w", pady=(10, 0))
 
+    def _on_set_username(self) -> None:
+        self.current_username = (self.username_var.get() or "").strip()
+        if not self.current_username:
+            messagebox.showwarning("Username required", "Please enter a username.")
+            return
+        self._set_badge(f"USER: {self.current_username.upper()}")
+
+    def _prompt_username(self) -> None:
+        typed = (self.username_var.get() or "").strip() if hasattr(self, "username_var") else ""
+        if typed:
+            self.current_username = typed
+            self._set_badge(f"USER: {self.current_username.upper()}")
+            return
+        name = simpledialog.askstring("Username", "Enter your username:")
+        self.current_username = (name or "").strip()
+        if hasattr(self, "username_var"):
+            self.username_var.set(self.current_username)
+        if self.current_username:
+            self._set_badge(f"USER: {self.current_username.upper()}")
+
     def _build_briefing(self) -> None:
         panel = ttk.Frame(self.brief_frame, style="Panel.TFrame", padding=18)
         panel.pack(fill="both", expand=True)
@@ -189,7 +272,19 @@ class UI_Manager:
         self.brief_countdown = tk.StringVar(value="Starting…")
         ttk.Label(panel, textvariable=self.brief_countdown, style="HUD.TLabel").pack(anchor="w", pady=(0, 12))
 
-        self.brief_text = tk.Text(panel, height=10, wrap="word", font=("Helvetica", 14))
+        self.brief_text = tk.Text(
+            panel,
+            height=10,
+            wrap="word",
+            font=("Helvetica", 13),
+            bg="#ffffff",
+            fg=self.p.text,
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=self.p.border,
+            padx=12,
+            pady=10,
+        )
         self.brief_text.pack(fill="x")
         self.brief_text.configure(state="disabled")
 
@@ -222,11 +317,28 @@ class UI_Manager:
         self.score_var = tk.StringVar(value="Score: 0")
         self.time_var = tk.StringVar(value="Time: --")
         self.case_var = tk.StringVar(value="Case: --")
+        self.pressure_var = tk.StringVar(value="Pressure: --")
         self.feedback_var = tk.StringVar(value="")
 
         ttk.Label(top, textvariable=self.case_var, style="HUD.TLabel").pack(side="left")
-        ttk.Label(top, textvariable=self.time_var, style="HUD.TLabel").pack(side="right")
-        ttk.Label(top, textvariable=self.score_var, style="HUD.TLabel").pack(side="right", padx=(0, 14))
+
+        hud_right = ttk.Frame(top, style="Panel.TFrame")
+        hud_right.pack(side="right")
+
+        ttk.Label(hud_right, textvariable=self.score_var, style="HUD.TLabel").pack(side="right")
+
+        pressure_wrap = ttk.Frame(hud_right, style="Panel.TFrame")
+        pressure_wrap.pack(side="right", padx=(0, 14))
+        ttk.Label(pressure_wrap, textvariable=self.pressure_var, style="Muted.TLabel").pack(anchor="e")
+        self.pressure_canvas = tk.Canvas(
+            pressure_wrap,
+            width=260,
+            height=56,
+            bg=self.p.panel,
+            highlightthickness=0,
+        )
+        self.pressure_canvas.pack(anchor="e", pady=(2, 0))
+        self._draw_pressure_monitor(remaining_s=0, limit_s=1)
 
         mid = ttk.Frame(self.game_frame)
         mid.pack(fill="both", expand=True, pady=(12, 0))
@@ -238,7 +350,17 @@ class UI_Manager:
         case_box.grid(row=0, column=0, sticky="nsew", padx=(0, 10))
 
         self.symptoms_txt = tk.Text(
-            case_box, height=7, wrap="word", font=("Helvetica", 12)
+            case_box,
+            height=7,
+            wrap="word",
+            font=("Helvetica", 12),
+            bg="#ffffff",
+            fg=self.p.text,
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=self.p.border,
+            padx=10,
+            pady=8,
         )
         self.symptoms_txt.pack(fill="x")
         self.symptoms_txt.configure(state="disabled")
@@ -361,6 +483,7 @@ class UI_Manager:
         mid.columnconfigure(0, weight=1)
         mid.columnconfigure(1, weight=1)
         mid.rowconfigure(0, weight=1)
+        mid.rowconfigure(1, weight=1)
 
         table_box = ttk.Labelframe(mid, text="Learning Curve (by Category)", padding=12)
         table_box.grid(row=0, column=0, sticky="nsew", padx=(0, 10))
@@ -388,6 +511,32 @@ class UI_Manager:
         self.tree.configure(yscrollcommand=scroll.set)
         scroll.grid(row=0, column=1, sticky="ns")
 
+        review_box = ttk.Labelframe(mid, text="Case Answer Review", padding=12)
+        review_box.grid(row=1, column=0, columnspan=2, sticky="nsew", pady=(10, 0))
+        review_box.rowconfigure(0, weight=1)
+        review_box.columnconfigure(0, weight=1)
+
+        self.answer_tree = ttk.Treeview(
+            review_box,
+            columns=("case", "category", "correct_code", "your_answer", "result"),
+            show="headings",
+            height=8,
+        )
+        for col, text, w in [
+            ("case", "Case", 70),
+            ("category", "Category", 170),
+            ("correct_code", "Correct Code", 120),
+            ("your_answer", "Your Answer", 130),
+            ("result", "Result", 90),
+        ]:
+            self.answer_tree.heading(col, text=text)
+            self.answer_tree.column(col, width=w, anchor="center")
+        self.answer_tree.grid(row=0, column=0, sticky="nsew")
+
+        ans_scroll = ttk.Scrollbar(review_box, orient="vertical", command=self.answer_tree.yview)
+        self.answer_tree.configure(yscrollcommand=ans_scroll.set)
+        ans_scroll.grid(row=0, column=1, sticky="ns")
+
         chart_box = ttk.Labelframe(mid, text="Data Analysis Report", padding=12)
         chart_box.grid(row=0, column=1, sticky="nsew")
         chart_box.rowconfigure(1, weight=1)
@@ -407,7 +556,7 @@ class UI_Manager:
         self.chart_select.pack(side="left", padx=(8, 0))
         self.chart_select.bind("<<ComboboxSelected>>", lambda _e: self._render_game_over())
 
-        self.chart = tk.Canvas(chart_box, background="white", highlightthickness=1, highlightbackground="#ddd")
+        self.chart = tk.Canvas(chart_box, background="#ffffff", highlightthickness=1, highlightbackground=self.p.border)
         self.chart.grid(row=1, column=0, sticky="nsew")
 
         bottom = ttk.Frame(self.over_frame)
@@ -437,7 +586,6 @@ class UI_Manager:
             self.brief_countdown.set(f"Briefing ends in {self._brief_remaining_s}s")
             if self._brief_remaining_s <= 0:
                 self._enter_play_phase()
-                return
         else:
             self.controller.tick()
             if self.controller.game_state == GameState.GAME_OVER:
@@ -487,6 +635,7 @@ class UI_Manager:
         self.score_var.set(f"Score: {self.controller.score}")
         self.time_var.set(f"Time: {self.controller.time_remaining}s / {self.controller.time_limit_s}s")
         self.case_var.set(f"Case: {self.controller.case_index}")
+        self._draw_pressure_monitor(self.controller.time_remaining, self.controller.time_limit_s)
         self.stability_bar.configure(maximum=self.controller.config.max_stability)
         self.stability_bar["value"] = self.controller.stability
         pct = int((self.controller.stability / max(1, self.controller.config.max_stability)) * 100)
@@ -499,6 +648,47 @@ class UI_Manager:
         elif pct <= 60:
             style = "Yellow.Horizontal.TProgressbar"
         self.stability_bar.configure(style=style)
+
+    def _draw_pressure_monitor(self, remaining_s: int, limit_s: int) -> None:
+        if not hasattr(self, "pressure_canvas"):
+            return
+        if not self.pressure_canvas.winfo_exists():
+            return
+
+        limit = max(1, int(limit_s))
+        rem = max(0, min(int(remaining_s), limit))
+        pressure_ratio = 1.0 - (rem / limit)
+        pressure_pct = int(pressure_ratio * 100)
+        self.pressure_var.set(f"Patient Pressure: {pressure_pct}%")
+
+        c = self.pressure_canvas
+        c.delete("all")
+
+        x0, y0, x1, y1 = 10, 24, 248, 42
+        c.create_text(x0, 10, anchor="w", text=f"{rem}s left", fill=self.p.text, font=("Helvetica", 10, "bold"))
+        c.create_text(x1, 10, anchor="e", text=f"/ {limit}s", fill=self.p.muted, font=("Helvetica", 9))
+
+        c.create_rectangle(x0, y0, x1, y1, fill="#f0f4fa", outline=self.p.border, width=1)
+
+        zone_w = (x1 - x0) / 3
+        c.create_rectangle(x0, y0, x0 + zone_w, y1, fill="#dff4e6", outline="")
+        c.create_rectangle(x0 + zone_w, y0, x0 + (2 * zone_w), y1, fill="#fff3d6", outline="")
+        c.create_rectangle(x0 + (2 * zone_w), y0, x1, y1, fill="#ffe1e1", outline="")
+
+        fill_x = x0 + ((x1 - x0) * pressure_ratio)
+        if pressure_pct <= 40:
+            fill_color = self.p.good
+        elif pressure_pct <= 75:
+            fill_color = self.p.warn
+        else:
+            fill_color = self.p.bad
+
+        c.create_rectangle(x0, y0, fill_x, y1, fill=fill_color, outline="")
+        c.create_line(fill_x, y0 - 3, fill_x, y1 + 3, fill=self.p.text, width=2)
+
+        for tick in range(0, 101, 25):
+            tx = x0 + ((x1 - x0) * (tick / 100))
+            c.create_line(tx, y1 + 2, tx, y1 + 7, fill=self.p.muted)
 
     def _on_submit(self) -> None:
         if self.answer_mode.get() == "select":
@@ -615,11 +805,10 @@ class UI_Manager:
         submits = self.stats.submit_records()
         attempted = len(submits)
         correct = sum(1 for r in submits if r.correct == 1)
-        last_ans = getattr(self.controller, "last_case_answer", "") or ""
-        tail = f"   |   Last case answer: {last_ans}" if last_ans else ""
+        player_name = self.current_username or "Unknown"
         self.over_title.configure(text=title)
-        self.over_subtitle.configure(text=f"Final Score: {self.controller.score}")
-        self.run_var.set(f"Attempts: {attempted}   Correct: {correct}   Wrong: {attempted - correct}{tail}")
+        self.over_subtitle.configure(text=f"Final Score: {self.controller.score}   |   Player: {player_name}")
+        self.run_var.set(f"Attempts: {attempted}   Correct: {correct}   Wrong: {attempted - correct}")
 
         for row in self.tree.get_children():
             self.tree.delete(row)
@@ -630,6 +819,17 @@ class UI_Manager:
                 "",
                 "end",
                 values=(cat, attempts, correct, f"{acc*100:.0f}%", t),
+            )
+
+        for row in self.answer_tree.get_children():
+            self.answer_tree.delete(row)
+        for i, rec in enumerate(submits, start=1):
+            entered = rec.entered_code.strip().upper() if rec.entered_code else "(skip)"
+            result = "Correct" if rec.correct == 1 else "Wrong"
+            self.answer_tree.insert(
+                "",
+                "end",
+                values=(i, rec.case_category, rec.case_code, entered, result),
             )
 
         self._render_metrics()
@@ -664,7 +864,11 @@ class UI_Manager:
             self._draw_error_histogram()
 
     def _canvas_dims(self) -> tuple[int, int]:
-        return (self.chart.winfo_width() or 420, self.chart.winfo_height() or 320)
+        # Ensure layout has finalized so chart sizes are accurate.
+        self.chart.update_idletasks()
+        w = self.chart.winfo_width()
+        h = self.chart.winfo_height()
+        return (max(420, w), max(320, h))
 
     def _draw_axes(self, title: str, x_label: str, y_label: str) -> tuple[int, int, int, int]:
         c = self.chart
@@ -763,14 +967,15 @@ class UI_Manager:
 
     def _save_session_log(self) -> None:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        out = self.data_dir / "game_logs" / f"session_{ts}.csv"
+        user_slug = (self.current_username or "unknown").strip().replace(" ", "_")
+        out = self.data_dir / "game_logs" / f"session_{user_slug}_{ts}.csv"
         try:
             path = self.stats.save_to_csv(out)
             self.controller.stats.log_attempt(
                 event="log_saved",
                 case_code="",
                 case_category="",
-                entered_code=str(path),
+                entered_code=f"{self.current_username or 'unknown'}::{path}",
                 correct=False,
                 time_remaining_s=self.controller.time_remaining,
                 time_limit_s=self.controller.time_limit_s,

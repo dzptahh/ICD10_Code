@@ -245,10 +245,8 @@ class GameController:
         )
         if self.stability <= 0:
             self.end_game(reason="stability")
-            answer = self._active_correct_code if not correct_desc else f"{self._active_correct_code} — {correct_desc}"
-            return False, f"Wrong. Correct: {answer}. Patient coded blue."
-        answer = self._active_correct_code if not correct_desc else f"{self._active_correct_code} — {correct_desc}"
-        return False, f"Wrong. Correct: {answer}. -{abs(self.config.points_wrong)} points."
+            return False, "Wrong. Patient coded blue."
+        return False, f"Wrong. -{abs(self.config.points_wrong)} points. Review the correct code in final results."
 
     def skip_case(self) -> None:
         if self.game_state != GameState.PLAYING or not self._active_correct_code:

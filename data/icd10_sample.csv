@@ -17,4 +17,173 @@ G20,Parkinson disease,Neurology
 E11.9,Type 2 diabetes mellitus,Endocrinology
 E03.9,Hypothyroidism,Endocrinology
 E05.90,Hyperthyroidism,Endocrinology
-
+E78.5,Hyperlipidemia unspecified,Endocrinology
+E66.9,Obesity unspecified,Endocrinology
+E87.6,Hypokalemia,Endocrinology
+E16.2,Hypoglycemia unspecified,Endocrinology
+E86.0,Dehydration,Endocrinology
+I10,Essential primary hypertension,Cardiology
+I11.0,Hypertensive heart disease with heart failure,Cardiology
+I25.10,Atherosclerotic heart disease,Cardiology
+I50.9,Heart failure unspecified,Cardiology
+I50.22,Chronic systolic heart failure,Cardiology
+I34.0,Mitral valve insufficiency,Cardiology
+I35.0,Aortic valve stenosis,Cardiology
+I47.1,Supraventricular tachycardia,Cardiology
+I49.9,Cardiac arrhythmia unspecified,Cardiology
+I26.99,Other pulmonary embolism without acute cor pulmonale,Cardiology
+I73.9,Peripheral vascular disease unspecified,Cardiology
+R07.9,Chest pain unspecified,Cardiology
+R00.2,Palpitations,Cardiology
+R55,Syncope and collapse,Cardiology
+I95.9,Hypotension unspecified,Cardiology
+J44.9,Chronic obstructive pulmonary disease unspecified,Respiratory
+J44.1,COPD with acute exacerbation,Respiratory
+J44.0,COPD with acute lower respiratory infection,Respiratory
+J06.9,Acute upper respiratory infection,Respiratory
+J01.90,Acute sinusitis unspecified,Respiratory
+J04.0,Acute laryngitis,Respiratory
+J20.9,Acute bronchitis unspecified,Respiratory
+J31.0,Chronic rhinitis,Respiratory
+J32.9,Chronic sinusitis unspecified,Respiratory
+J30.9,Allergic rhinitis unspecified,Respiratory
+J81.0,Acute pulmonary edema,Respiratory
+J93.9,Pneumothorax unspecified,Respiratory
+J98.01,Acute bronchospasm,Respiratory
+R06.02,Shortness of breath,Respiratory
+R05.9,Cough unspecified,Respiratory
+A09,Infectious gastroenteritis and colitis,Infectious
+A49.9,Bacterial infection unspecified,Infectious
+A04.72,Enterocolitis due to Clostridium difficile recurrent,Infectious
+B34.9,Viral infection unspecified,Infectious
+B37.0,Candidal stomatitis,Infectious
+B35.3,Tinea pedis,Infectious
+B02.9,Zoster without complications,Infectious
+B01.9,Varicella without complication,Infectious
+J10.1,Influenza with respiratory manifestations,Infectious
+U07.1,COVID-19,Infectious
+N30.00,Acute cystitis without hematuria,Infectious
+N10,Acute pyelonephritis,Infectious
+L03.90,Cellulitis unspecified,Infectious
+L02.91,Cutaneous abscess unspecified,Infectious
+A15.9,Respiratory tuberculosis unspecified,Infectious
+K59.00,Constipation unspecified,Gastroenterology
+K59.1,Functional diarrhea,Gastroenterology
+K58.9,Irritable bowel syndrome without diarrhea,Gastroenterology
+K57.30,Diverticulosis of large intestine without perforation,Gastroenterology
+K57.32,Diverticulitis of large intestine without perforation,Gastroenterology
+K35.80,Acute appendicitis unspecified,Gastroenterology
+K37,Unspecified appendicitis,Gastroenterology
+K40.90,Unilateral inguinal hernia without obstruction,Gastroenterology
+K42.9,Umbilical hernia without obstruction,Gastroenterology
+K44.9,Diaphragmatic hernia without obstruction,Gastroenterology
+K56.609,Unspecified intestinal obstruction,Gastroenterology
+K62.5,Hemorrhage of anus and rectum,Gastroenterology
+R10.9,Abdominal pain unspecified,Gastroenterology
+R11.2,Nausea with vomiting,Gastroenterology
+R19.7,Diarrhea unspecified,Gastroenterology
+G44.1,Vascular headache not elsewhere classified,Neurology
+G40.909,Epilepsy unspecified not intractable,Neurology
+G40.901,Epilepsy unspecified intractable,Neurology
+G35,Multiple sclerosis,Neurology
+G62.9,Polyneuropathy unspecified,Neurology
+G56.00,Carpal tunnel syndrome unspecified upper limb,Neurology
+G47.00,Insomnia unspecified,Neurology
+G47.33,Obstructive sleep apnea adult,Neurology
+G25.81,Restless legs syndrome,Neurology
+R42,Dizziness and giddiness,Neurology
+R51.9,Headache unspecified,Neurology
+R41.3,Other amnesia,Neurology
+F03.90,Unspecified dementia without behavioral disturbance,Neurology
+M54.2,Cervicalgia,Neurology
+M54.50,Low back pain unspecified,Neurology
+E11.65,Type 2 diabetes mellitus with hyperglycemia,Endocrinology
+E11.22,Type 2 diabetes mellitus with diabetic chronic kidney disease,Endocrinology
+E10.9,Type 1 diabetes mellitus without complications,Endocrinology
+E78.0,Pure hypercholesterolemia,Endocrinology
+E78.1,Pure hyperglyceridemia,Endocrinology
+E06.3,Autoimmune thyroiditis,Endocrinology
+E04.1,Nontoxic single thyroid nodule,Endocrinology
+E27.40,Adrenocortical insufficiency unspecified,Endocrinology
+E23.0,Hypopituitarism,Endocrinology
+M81.0,Age-related osteoporosis without fracture,Endocrinology
+M85.80,Other specified disorders of bone density,Endocrinology
+R63.5,Abnormal weight gain,Endocrinology
+R63.4,Abnormal weight loss,Endocrinology
+D50.9,Iron deficiency anemia unspecified,Hematology
+D64.9,Anemia unspecified,Hematology
+D69.6,Thrombocytopenia unspecified,Hematology
+D72.829,Elevated white blood cell count,Hematology
+D68.9,Coagulation defect unspecified,Hematology
+D70.9,Neutropenia unspecified,Hematology
+D57.1,Sickle-cell disease without crisis,Hematology
+C91.10,Chronic lymphocytic leukemia not in remission,Hematology
+C92.00,Acute myeloblastic leukemia not in remission,Hematology
+C90.00,Multiple myeloma not having achieved remission,Hematology
+N17.9,Acute kidney failure unspecified,Nephrology
+N18.9,Chronic kidney disease unspecified,Nephrology
+N18.3,Chronic kidney disease stage 3,Nephrology
+N18.4,Chronic kidney disease stage 4,Nephrology
+N18.6,End stage renal disease,Nephrology
+N20.0,Calculus of kidney,Nephrology
+N13.30,Unspecified hydronephrosis,Nephrology
+N04.9,Nephrotic syndrome with unspecified morphologic changes,Nephrology
+R31.9,Hematuria unspecified,Nephrology
+R80.9,Proteinuria unspecified,Nephrology
+M17.9,Osteoarthritis of knee unspecified,Orthopedics
+M16.9,Osteoarthritis of hip unspecified,Orthopedics
+M19.90,Unspecified osteoarthritis unspecified site,Orthopedics
+M25.561,Pain in right knee,Orthopedics
+M25.562,Pain in left knee,Orthopedics
+M79.671,Pain in right foot,Orthopedics
+M79.672,Pain in left foot,Orthopedics
+M54.16,Radiculopathy lumbar region,Orthopedics
+M51.26,Other intervertebral disc displacement lumbar region,Orthopedics
+S72.001A,Fracture of unspecified part of neck of right femur initial encounter,Orthopedics
+S72.002A,Fracture of unspecified part of neck of left femur initial encounter,Orthopedics
+S52.501A,Unspecified fracture of lower end of right radius initial encounter,Orthopedics
+S52.502A,Unspecified fracture of lower end of left radius initial encounter,Orthopedics
+S82.201A,Unspecified fracture of shaft of right tibia initial encounter,Orthopedics
+S82.202A,Unspecified fracture of shaft of left tibia initial encounter,Orthopedics
+L20.9,Atopic dermatitis unspecified,Dermatology
+L30.9,Dermatitis unspecified,Dermatology
+L40.9,Psoriasis unspecified,Dermatology
+L50.9,Urticaria unspecified,Dermatology
+L70.0,Acne vulgaris,Dermatology
+L71.9,Rosacea unspecified,Dermatology
+L82.1,Seborrheic keratosis,Dermatology
+L98.9,Disorder of skin and subcutaneous tissue unspecified,Dermatology
+L89.90,Pressure ulcer unspecified site unspecified stage,Dermatology
+L97.909,Non-pressure chronic ulcer unspecified part of unspecified lower leg,Dermatology
+F41.1,Generalized anxiety disorder,Psychiatry
+F41.9,Anxiety disorder unspecified,Psychiatry
+F32.9,Major depressive disorder single episode unspecified,Psychiatry
+F33.1,Major depressive disorder recurrent moderate,Psychiatry
+F31.9,Bipolar disorder unspecified,Psychiatry
+F20.9,Schizophrenia unspecified,Psychiatry
+F90.9,Attention-deficit hyperactivity disorder unspecified type,Psychiatry
+F43.10,Post-traumatic stress disorder unspecified,Psychiatry
+F10.20,Alcohol dependence uncomplicated,Psychiatry
+F11.20,Opioid dependence uncomplicated,Psychiatry
+H66.90,Otitis media unspecified unspecified ear,ENT
+H60.90,Otitis externa unspecified unspecified ear,ENT
+H61.23,Impacted cerumen bilateral,ENT
+H10.9,Conjunctivitis unspecified,ENT
+H25.9,Age-related cataract unspecified,ENT
+H40.9,Glaucoma unspecified,ENT
+H52.4,Presbyopia,ENT
+R09.81,Nasal congestion,ENT
+R49.0,Dysphonia,ENT
+R13.10,Dysphagia unspecified,ENT
+O80,Encounter for full-term uncomplicated delivery,Obstetrics
+O21.9,Vomiting of pregnancy unspecified,Obstetrics
+O24.419,Gestational diabetes mellitus in pregnancy unspecified control,Obstetrics
+O13.9,Gestational hypertension without significant proteinuria,Obstetrics
+O99.013,Anemia complicating pregnancy third trimester,Obstetrics
+Z34.90,Encounter for supervision of normal pregnancy unspecified trimester,Obstetrics
+N91.2,Amenorrhea unspecified,Gynecology
+N92.0,Excessive and frequent menstruation with regular cycle,Gynecology
+N94.6,Dysmenorrhea unspecified,Gynecology
+N76.0,Acute vaginitis,Gynecology
+N80.9,Endometriosis unspecified,Gynecology
+Z30.09,Encounter for other general counseling and advice on contraception,Gynecology

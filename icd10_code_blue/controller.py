@@ -59,6 +59,7 @@ class GameController:
         self.last_game_over_reason: str = ""
         self.last_case_answer: str = ""
         self._case_clock_started: bool = False
+        self._force_full_time_next_case: bool = False
 
     def load_cases(self, cases: list[PatientCase]) -> None:
         self._cases = list(cases)
@@ -112,6 +113,9 @@ class GameController:
         return c
 
     def _compute_time_limit(self) -> int:
+        if self._force_full_time_next_case:
+            self._force_full_time_next_case = False
+            return self.config.base_seconds_per_case
         steps = 0 if self.config.difficulty_step_points <= 0 else self.score // self.config.difficulty_step_points
         reduced = self.config.base_seconds_per_case - int(steps) * self.config.difficulty_step_seconds
         softened = reduced
@@ -132,8 +136,11 @@ class GameController:
             self._active_correct_code = case.correct_code.strip().upper()
             self._active_entry = self.db.get_by_code(self._active_correct_code)
             self._active_category = self._active_entry.category if self._active_entry else "Uncategorized"
+            prompt = case.symptoms
+            if case.description:
+                prompt = f"Symptoms: {case.symptoms}\n\nClinical description: {case.description}"
             self.current_patient = Patient(
-                symptoms_text=case.symptoms,
+                symptoms_text=prompt,
                 correct_code=self._active_correct_code,
                 category=self._active_category,
             )
@@ -223,6 +230,8 @@ class GameController:
             )
             answer = self._active_correct_code if not correct_desc else f"{self._active_correct_code} — {correct_desc}"
             msg = f"Correct: {answer}. +{self.config.points_correct + bonus} points."
+            # Game feel: a correct diagnosis resets next case timer to full.
+            self._force_full_time_next_case = True
             self._next_case()
             return True, msg
 

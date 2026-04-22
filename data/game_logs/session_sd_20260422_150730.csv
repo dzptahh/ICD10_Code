@@ -1,0 +1,5 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T08:07:00Z,case_start,J93.9,Respiratory,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T08:07:18Z,submit,J93.9,Respiratory,J45.909,0,17,1,5,0.200,13,30,46,-25
+2026-04-22T08:07:26Z,submit,J93.9,Respiratory,J45.909,0,25,1,5,0.200,5,30,10,-50
+2026-04-22T08:07:30Z,game_over:timeout,J93.9,Respiratory,,0,0,0,0,0.000,0,0,0,-50

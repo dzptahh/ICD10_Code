@@ -6,11 +6,10 @@ from pathlib import Path
 from typing import Callable
 
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog, simpledialog
+from tkinter import ttk, messagebox, simpledialog
 
 from .controller import GameController, GameState
 from .icd_database import ICDEntry
-from .cases import load_cases_csv
 from .stats import StatsTracker
 
 
@@ -75,6 +74,7 @@ class UI_Manager:
         self.style.configure("Muted.TLabel", background=self.p.bg, foreground=self.p.muted)
         self.style.configure("Panel.TFrame", background=self.p.panel)
         self.style.configure("Panel.TLabel", background=self.p.panel, foreground=self.p.text)
+        self.style.configure("Subtle.TLabel", background=self.p.panel, foreground=self.p.muted)
         self.style.configure("Title.TLabel", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 22, "bold"))
         self.style.configure(
             "Badge.TLabel",
@@ -214,14 +214,14 @@ class UI_Manager:
         left = ttk.Frame(self.menu_frame, style="Card.TFrame", padding=20)
         left.pack(fill="both", expand=True)
 
-        ttk.Label(left, text="Medical coding under pressure.", style="HUD.TLabel").pack(anchor="w")
+        ttk.Label(left, text="ICD-10 Code Blue", style="Title.TLabel").pack(anchor="w")
         ttk.Label(
             left,
-            text="Type a code or select from the handbook. Wrong answers or slow play drops stability.",
+            text="Emergency coding challenge. Diagnose fast, stay accurate, and keep the patient stable.",
             style="Muted.TLabel",
             wraplength=820,
             justify="left",
-        ).pack(anchor="w", pady=(6, 18))
+        ).pack(anchor="w", pady=(6, 16))
 
         user_row = ttk.Frame(left, style="Panel.TFrame")
         user_row.pack(fill="x", pady=(0, 12))
@@ -237,24 +237,26 @@ class UI_Manager:
         ttk.Button(btns, text="Start Game", command=self.start_game, style="Game.TButton").grid(
             row=0, column=0, padx=(0, 10), pady=6, sticky="w"
         )
-        ttk.Button(btns, text="Load Cases CSV", command=self._load_cases_csv, style="Game.TButton").grid(
-            row=0, column=1, padx=(0, 10), pady=6, sticky="w"
-        )
         ttk.Button(btns, text="Quit", command=self.root.destroy, style="Game.TButton").grid(
-            row=0, column=2, pady=6, sticky="w"
+            row=0, column=1, pady=6, sticky="w"
         )
 
         how = ttk.Labelframe(left, text="How to play", padding=12)
-        how.pack(fill="x", pady=(18, 0))
+        how.pack(fill="x", pady=(16, 0))
         ttk.Label(
             how,
             text="- Search the handbook on the right.\n- Choose a method: Type or Select.\n- Submit before time runs out.\n- Keep stability above 0 to avoid CODE BLUE.",
             style="Muted.TLabel",
             justify="left",
         ).pack(anchor="w")
-
-        self.cases_status = tk.StringVar(value="Cases: (using auto-generated symptoms)")
-        ttk.Label(left, textvariable=self.cases_status, style="Muted.TLabel").pack(anchor="w", pady=(10, 0))
+        stats_strip = ttk.Frame(left, style="Panel.TFrame", padding=(12, 10))
+        stats_strip.pack(fill="x", pady=(12, 0))
+        ttk.Label(stats_strip, text="Game vibe", style="HUD.TLabel").pack(anchor="w")
+        ttk.Label(
+            stats_strip,
+            text="Fast rounds  |  Live pressure monitor  |  End-run analytics",
+            style="Subtle.TLabel",
+        ).pack(anchor="w", pady=(4, 0))
 
     def _on_set_username(self) -> None:
         self.current_username = (self.username_var.get() or "").strip()
@@ -314,36 +316,16 @@ class UI_Manager:
         self._in_briefing = False
         self._brief_remaining_s = 0
 
-    def _load_cases_csv(self) -> None:
-        path = filedialog.askopenfilename(
-            title="Select patient cases CSV",
-            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
-        )
-        if not path:
-            return
-        try:
-            cases = load_cases_csv(path)
-            self.controller.load_cases(cases)
-            self.cases_status.set(f"Cases loaded: {len(cases)} (from {Path(path).name})")
-        except Exception as e:
-            messagebox.showerror("Load failed", f"Could not load Cases CSV:\n{e}")
-
     def _build_game(self) -> None:
         top = ttk.Frame(self.game_frame, style="Panel.TFrame", padding=(12, 10))
         top.pack(fill="x")
 
-        self.score_var = tk.StringVar(value="Score: 0")
         self.time_var = tk.StringVar(value="Time: --")
-        self.case_var = tk.StringVar(value="Case: --")
         self.pressure_var = tk.StringVar(value="Pressure: --")
         self.feedback_var = tk.StringVar(value="")
 
-        ttk.Label(top, textvariable=self.case_var, style="HUD.TLabel").pack(side="left")
-
         hud_right = ttk.Frame(top, style="Panel.TFrame")
         hud_right.pack(side="right")
-
-        ttk.Label(hud_right, textvariable=self.score_var, style="HUD.TLabel").pack(side="right")
 
         pressure_wrap = ttk.Frame(hud_right, style="Panel.TFrame")
         pressure_wrap.pack(side="right", padx=(0, 14))
@@ -382,16 +364,6 @@ class UI_Manager:
         )
         self.symptoms_txt.pack(fill="x")
         self.symptoms_txt.configure(state="disabled")
-
-        stability_row = ttk.Frame(case_box)
-        stability_row.pack(fill="x", pady=(12, 0))
-        ttk.Label(stability_row, text="Patient Stability").pack(side="left")
-        self.stability_var = tk.StringVar(value="100%")
-        ttk.Label(stability_row, textvariable=self.stability_var).pack(side="right")
-        self.stability_bar = ttk.Progressbar(
-            stability_row, length=300, maximum=self.controller.config.max_stability
-        )
-        self.stability_bar.pack(side="left", padx=(10, 0), fill="x", expand=True)
 
         input_box = ttk.Labelframe(case_box, text="Choose ICD-10 code", padding=12)
         input_box.pack(fill="x", pady=(12, 0))
@@ -652,22 +624,8 @@ class UI_Manager:
         self._refresh_hud()
 
     def _refresh_hud(self) -> None:
-        self.score_var.set(f"Score: {self.controller.score}")
         self.time_var.set(f"Time: {self.controller.time_remaining}s / {self.controller.time_limit_s}s")
-        self.case_var.set(f"Case: {self.controller.case_index}")
         self._draw_pressure_monitor(self.controller.time_remaining, self.controller.time_limit_s)
-        self.stability_bar.configure(maximum=self.controller.config.max_stability)
-        self.stability_bar["value"] = self.controller.stability
-        pct = int((self.controller.stability / max(1, self.controller.config.max_stability)) * 100)
-        self.stability_var.set(f"{pct}%")
-
-        # Change bar color by stability level
-        style = "Green.Horizontal.TProgressbar"
-        if pct <= 30:
-            style = "Red.Horizontal.TProgressbar"
-        elif pct <= 60:
-            style = "Yellow.Horizontal.TProgressbar"
-        self.stability_bar.configure(style=style)
 
     def _draw_pressure_monitor(self, remaining_s: int, limit_s: int) -> None:
         if not hasattr(self, "pressure_canvas"):

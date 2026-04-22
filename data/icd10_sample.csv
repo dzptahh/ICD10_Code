@@ -1,189 +1,189 @@
-code,description,category
-I21.9,Acute myocardial infarction,Cardiology
-I20.0,Unstable angina,Cardiology
-I48.91,Atrial fibrillation,Cardiology
-J45.909,Asthma,Respiratory
-J18.9,Pneumonia,Respiratory
-J96.00,Acute respiratory failure,Respiratory
-A41.9,Sepsis,Infectious
-N39.0,Urinary tract infection,Infectious
-J02.9,Acute pharyngitis,Infectious
-K21.9,Gastro-esophageal reflux disease,Gastroenterology
-K52.9,Noninfective gastroenteritis and colitis,Gastroenterology
-K80.20,Calculus of gallbladder without cholecystitis,Gastroenterology
-I63.9,Cerebral infarction,Neurology
-G43.909,Migraine,Neurology
-G20,Parkinson disease,Neurology
-E11.9,Type 2 diabetes mellitus,Endocrinology
-E03.9,Hypothyroidism,Endocrinology
-E05.90,Hyperthyroidism,Endocrinology
-E78.5,Hyperlipidemia unspecified,Endocrinology
-E66.9,Obesity unspecified,Endocrinology
-E87.6,Hypokalemia,Endocrinology
-E16.2,Hypoglycemia unspecified,Endocrinology
-E86.0,Dehydration,Endocrinology
-I10,Essential primary hypertension,Cardiology
-I11.0,Hypertensive heart disease with heart failure,Cardiology
-I25.10,Atherosclerotic heart disease,Cardiology
-I50.9,Heart failure unspecified,Cardiology
-I50.22,Chronic systolic heart failure,Cardiology
-I34.0,Mitral valve insufficiency,Cardiology
-I35.0,Aortic valve stenosis,Cardiology
-I47.1,Supraventricular tachycardia,Cardiology
-I49.9,Cardiac arrhythmia unspecified,Cardiology
-I26.99,Other pulmonary embolism without acute cor pulmonale,Cardiology
-I73.9,Peripheral vascular disease unspecified,Cardiology
-R07.9,Chest pain unspecified,Cardiology
-R00.2,Palpitations,Cardiology
-R55,Syncope and collapse,Cardiology
-I95.9,Hypotension unspecified,Cardiology
-J44.9,Chronic obstructive pulmonary disease unspecified,Respiratory
-J44.1,COPD with acute exacerbation,Respiratory
-J44.0,COPD with acute lower respiratory infection,Respiratory
-J06.9,Acute upper respiratory infection,Respiratory
-J01.90,Acute sinusitis unspecified,Respiratory
-J04.0,Acute laryngitis,Respiratory
-J20.9,Acute bronchitis unspecified,Respiratory
-J31.0,Chronic rhinitis,Respiratory
-J32.9,Chronic sinusitis unspecified,Respiratory
-J30.9,Allergic rhinitis unspecified,Respiratory
-J81.0,Acute pulmonary edema,Respiratory
-J93.9,Pneumothorax unspecified,Respiratory
-J98.01,Acute bronchospasm,Respiratory
-R06.02,Shortness of breath,Respiratory
-R05.9,Cough unspecified,Respiratory
-A09,Infectious gastroenteritis and colitis,Infectious
-A49.9,Bacterial infection unspecified,Infectious
-A04.72,Enterocolitis due to Clostridium difficile recurrent,Infectious
-B34.9,Viral infection unspecified,Infectious
-B37.0,Candidal stomatitis,Infectious
-B35.3,Tinea pedis,Infectious
-B02.9,Zoster without complications,Infectious
-B01.9,Varicella without complication,Infectious
-J10.1,Influenza with respiratory manifestations,Infectious
-U07.1,COVID-19,Infectious
-N30.00,Acute cystitis without hematuria,Infectious
-N10,Acute pyelonephritis,Infectious
-L03.90,Cellulitis unspecified,Infectious
-L02.91,Cutaneous abscess unspecified,Infectious
-A15.9,Respiratory tuberculosis unspecified,Infectious
-K59.00,Constipation unspecified,Gastroenterology
-K59.1,Functional diarrhea,Gastroenterology
-K58.9,Irritable bowel syndrome without diarrhea,Gastroenterology
-K57.30,Diverticulosis of large intestine without perforation,Gastroenterology
-K57.32,Diverticulitis of large intestine without perforation,Gastroenterology
-K35.80,Acute appendicitis unspecified,Gastroenterology
-K37,Unspecified appendicitis,Gastroenterology
-K40.90,Unilateral inguinal hernia without obstruction,Gastroenterology
-K42.9,Umbilical hernia without obstruction,Gastroenterology
-K44.9,Diaphragmatic hernia without obstruction,Gastroenterology
-K56.609,Unspecified intestinal obstruction,Gastroenterology
-K62.5,Hemorrhage of anus and rectum,Gastroenterology
-R10.9,Abdominal pain unspecified,Gastroenterology
-R11.2,Nausea with vomiting,Gastroenterology
-R19.7,Diarrhea unspecified,Gastroenterology
-G44.1,Vascular headache not elsewhere classified,Neurology
-G40.909,Epilepsy unspecified not intractable,Neurology
-G40.901,Epilepsy unspecified intractable,Neurology
-G35,Multiple sclerosis,Neurology
-G62.9,Polyneuropathy unspecified,Neurology
-G56.00,Carpal tunnel syndrome unspecified upper limb,Neurology
-G47.00,Insomnia unspecified,Neurology
-G47.33,Obstructive sleep apnea adult,Neurology
-G25.81,Restless legs syndrome,Neurology
-R42,Dizziness and giddiness,Neurology
-R51.9,Headache unspecified,Neurology
-R41.3,Other amnesia,Neurology
-F03.90,Unspecified dementia without behavioral disturbance,Neurology
-M54.2,Cervicalgia,Neurology
-M54.50,Low back pain unspecified,Neurology
-E11.65,Type 2 diabetes mellitus with hyperglycemia,Endocrinology
-E11.22,Type 2 diabetes mellitus with diabetic chronic kidney disease,Endocrinology
-E10.9,Type 1 diabetes mellitus without complications,Endocrinology
-E78.0,Pure hypercholesterolemia,Endocrinology
-E78.1,Pure hyperglyceridemia,Endocrinology
-E06.3,Autoimmune thyroiditis,Endocrinology
-E04.1,Nontoxic single thyroid nodule,Endocrinology
-E27.40,Adrenocortical insufficiency unspecified,Endocrinology
-E23.0,Hypopituitarism,Endocrinology
-M81.0,Age-related osteoporosis without fracture,Endocrinology
-M85.80,Other specified disorders of bone density,Endocrinology
-R63.5,Abnormal weight gain,Endocrinology
-R63.4,Abnormal weight loss,Endocrinology
-D50.9,Iron deficiency anemia unspecified,Hematology
-D64.9,Anemia unspecified,Hematology
-D69.6,Thrombocytopenia unspecified,Hematology
-D72.829,Elevated white blood cell count,Hematology
-D68.9,Coagulation defect unspecified,Hematology
-D70.9,Neutropenia unspecified,Hematology
-D57.1,Sickle-cell disease without crisis,Hematology
-C91.10,Chronic lymphocytic leukemia not in remission,Hematology
-C92.00,Acute myeloblastic leukemia not in remission,Hematology
-C90.00,Multiple myeloma not having achieved remission,Hematology
-N17.9,Acute kidney failure unspecified,Nephrology
-N18.9,Chronic kidney disease unspecified,Nephrology
-N18.3,Chronic kidney disease stage 3,Nephrology
-N18.4,Chronic kidney disease stage 4,Nephrology
-N18.6,End stage renal disease,Nephrology
-N20.0,Calculus of kidney,Nephrology
-N13.30,Unspecified hydronephrosis,Nephrology
-N04.9,Nephrotic syndrome with unspecified morphologic changes,Nephrology
-R31.9,Hematuria unspecified,Nephrology
-R80.9,Proteinuria unspecified,Nephrology
-M17.9,Osteoarthritis of knee unspecified,Orthopedics
-M16.9,Osteoarthritis of hip unspecified,Orthopedics
-M19.90,Unspecified osteoarthritis unspecified site,Orthopedics
-M25.561,Pain in right knee,Orthopedics
-M25.562,Pain in left knee,Orthopedics
-M79.671,Pain in right foot,Orthopedics
-M79.672,Pain in left foot,Orthopedics
-M54.16,Radiculopathy lumbar region,Orthopedics
-M51.26,Other intervertebral disc displacement lumbar region,Orthopedics
-S72.001A,Fracture of unspecified part of neck of right femur initial encounter,Orthopedics
-S72.002A,Fracture of unspecified part of neck of left femur initial encounter,Orthopedics
-S52.501A,Unspecified fracture of lower end of right radius initial encounter,Orthopedics
-S52.502A,Unspecified fracture of lower end of left radius initial encounter,Orthopedics
-S82.201A,Unspecified fracture of shaft of right tibia initial encounter,Orthopedics
-S82.202A,Unspecified fracture of shaft of left tibia initial encounter,Orthopedics
-L20.9,Atopic dermatitis unspecified,Dermatology
-L30.9,Dermatitis unspecified,Dermatology
-L40.9,Psoriasis unspecified,Dermatology
-L50.9,Urticaria unspecified,Dermatology
-L70.0,Acne vulgaris,Dermatology
-L71.9,Rosacea unspecified,Dermatology
-L82.1,Seborrheic keratosis,Dermatology
-L98.9,Disorder of skin and subcutaneous tissue unspecified,Dermatology
-L89.90,Pressure ulcer unspecified site unspecified stage,Dermatology
-L97.909,Non-pressure chronic ulcer unspecified part of unspecified lower leg,Dermatology
-F41.1,Generalized anxiety disorder,Psychiatry
-F41.9,Anxiety disorder unspecified,Psychiatry
-F32.9,Major depressive disorder single episode unspecified,Psychiatry
-F33.1,Major depressive disorder recurrent moderate,Psychiatry
-F31.9,Bipolar disorder unspecified,Psychiatry
-F20.9,Schizophrenia unspecified,Psychiatry
-F90.9,Attention-deficit hyperactivity disorder unspecified type,Psychiatry
-F43.10,Post-traumatic stress disorder unspecified,Psychiatry
-F10.20,Alcohol dependence uncomplicated,Psychiatry
-F11.20,Opioid dependence uncomplicated,Psychiatry
-H66.90,Otitis media unspecified unspecified ear,ENT
-H60.90,Otitis externa unspecified unspecified ear,ENT
-H61.23,Impacted cerumen bilateral,ENT
-H10.9,Conjunctivitis unspecified,ENT
-H25.9,Age-related cataract unspecified,ENT
-H40.9,Glaucoma unspecified,ENT
-H52.4,Presbyopia,ENT
-R09.81,Nasal congestion,ENT
-R49.0,Dysphonia,ENT
-R13.10,Dysphagia unspecified,ENT
-O80,Encounter for full-term uncomplicated delivery,Obstetrics
-O21.9,Vomiting of pregnancy unspecified,Obstetrics
-O24.419,Gestational diabetes mellitus in pregnancy unspecified control,Obstetrics
-O13.9,Gestational hypertension without significant proteinuria,Obstetrics
-O99.013,Anemia complicating pregnancy third trimester,Obstetrics
-Z34.90,Encounter for supervision of normal pregnancy unspecified trimester,Obstetrics
-N91.2,Amenorrhea unspecified,Gynecology
-N92.0,Excessive and frequent menstruation with regular cycle,Gynecology
-N94.6,Dysmenorrhea unspecified,Gynecology
-N76.0,Acute vaginitis,Gynecology
-N80.9,Endometriosis unspecified,Gynecology
-Z30.09,Encounter for other general counseling and advice on contraception,Gynecology
+code,description,category,symptoms
+I21.9,Acute myocardial infarction,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Acute myocardial infarction."
+I20.0,Unstable angina,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Unstable angina.
+I48.91,Atrial fibrillation,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Atrial fibrillation."
+J45.909,Asthma,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Asthma.
+J18.9,Pneumonia,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Pneumonia."
+J96.00,Acute respiratory failure,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Acute respiratory failure.
+A41.9,Sepsis,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Sepsis."
+N39.0,Urinary tract infection,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Urinary tract infection.
+J02.9,Acute pharyngitis,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Acute pharyngitis."
+K21.9,Gastro-esophageal reflux disease,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Gastro-esophageal reflux disease.
+K52.9,Noninfective gastroenteritis and colitis,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Noninfective gastroenteritis and colitis."
+K80.20,Calculus of gallbladder without cholecystitis,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Calculus of gallbladder without cholecystitis.
+I63.9,Cerebral infarction,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Cerebral infarction."
+G43.909,Migraine,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Migraine.
+G20,Parkinson disease,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Parkinson disease."
+E11.9,Type 2 diabetes mellitus,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Type 2 diabetes mellitus.
+E03.9,Hypothyroidism,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Hypothyroidism."
+E05.90,Hyperthyroidism,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Hyperthyroidism.
+E78.5,Hyperlipidemia unspecified,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Hyperlipidemia unspecified."
+E66.9,Obesity unspecified,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Obesity unspecified.
+E87.6,Hypokalemia,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Hypokalemia."
+E16.2,Hypoglycemia unspecified,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Hypoglycemia unspecified.
+E86.0,Dehydration,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Dehydration."
+I10,Essential primary hypertension,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Essential primary hypertension.
+I11.0,Hypertensive heart disease with heart failure,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Hypertensive heart disease with heart failure."
+I25.10,Atherosclerotic heart disease,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Atherosclerotic heart disease.
+I50.9,Heart failure unspecified,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Heart failure unspecified."
+I50.22,Chronic systolic heart failure,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Chronic systolic heart failure.
+I34.0,Mitral valve insufficiency,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Mitral valve insufficiency."
+I35.0,Aortic valve stenosis,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Aortic valve stenosis.
+I47.1,Supraventricular tachycardia,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Supraventricular tachycardia."
+I49.9,Cardiac arrhythmia unspecified,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Cardiac arrhythmia unspecified.
+I26.99,Other pulmonary embolism without acute cor pulmonale,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Other pulmonary embolism without acute cor pulmonale."
+I73.9,Peripheral vascular disease unspecified,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Peripheral vascular disease unspecified.
+R07.9,Chest pain unspecified,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Chest pain unspecified."
+R00.2,Palpitations,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Palpitations.
+R55,Syncope and collapse,Cardiology,"Chest discomfort, possible cardiac cause, diaphoresis, and shortness of breath. Clinical clue: Syncope and collapse."
+I95.9,Hypotension unspecified,Cardiology,Palpitations with pressure-like chest pain and mild dizziness. Clinical clue: Hypotension unspecified.
+J44.9,Chronic obstructive pulmonary disease unspecified,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Chronic obstructive pulmonary disease unspecified."
+J44.1,COPD with acute exacerbation,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: COPD with acute exacerbation.
+J44.0,COPD with acute lower respiratory infection,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: COPD with acute lower respiratory infection."
+J06.9,Acute upper respiratory infection,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Acute upper respiratory infection.
+J01.90,Acute sinusitis unspecified,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Acute sinusitis unspecified."
+J04.0,Acute laryngitis,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Acute laryngitis.
+J20.9,Acute bronchitis unspecified,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Acute bronchitis unspecified."
+J31.0,Chronic rhinitis,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Chronic rhinitis.
+J32.9,Chronic sinusitis unspecified,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Chronic sinusitis unspecified."
+J30.9,Allergic rhinitis unspecified,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Allergic rhinitis unspecified.
+J81.0,Acute pulmonary edema,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Acute pulmonary edema."
+J93.9,Pneumothorax unspecified,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Pneumothorax unspecified.
+J98.01,Acute bronchospasm,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Acute bronchospasm."
+R06.02,Shortness of breath,Respiratory,Pleuritic chest pain with rapid breathing and low oxygen saturation. Clinical clue: Shortness of breath.
+R05.9,Cough unspecified,Respiratory,"Dyspnea, cough, chest tightness, and reduced breath sounds. Clinical clue: Cough unspecified."
+A09,Infectious gastroenteritis and colitis,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Infectious gastroenteritis and colitis.
+A49.9,Bacterial infection unspecified,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Bacterial infection unspecified."
+A04.72,Enterocolitis due to Clostridium difficile recurrent,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Enterocolitis due to Clostridium difficile recurrent.
+B34.9,Viral infection unspecified,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Viral infection unspecified."
+B37.0,Candidal stomatitis,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Candidal stomatitis.
+B35.3,Tinea pedis,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Tinea pedis."
+B02.9,Zoster without complications,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Zoster without complications.
+B01.9,Varicella without complication,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Varicella without complication."
+J10.1,Influenza with respiratory manifestations,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Influenza with respiratory manifestations.
+U07.1,COVID-19,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: COVID-19."
+N30.00,Acute cystitis without hematuria,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Acute cystitis without hematuria.
+N10,Acute pyelonephritis,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Acute pyelonephritis."
+L03.90,Cellulitis unspecified,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Cellulitis unspecified.
+L02.91,Cutaneous abscess unspecified,Infectious,"Fever, chills, fatigue, and inflammatory signs suggesting infection. Clinical clue: Cutaneous abscess unspecified."
+A15.9,Respiratory tuberculosis unspecified,Infectious,Acute systemic symptoms with possible infectious source and malaise. Clinical clue: Respiratory tuberculosis unspecified.
+K59.00,Constipation unspecified,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Constipation unspecified."
+K59.1,Functional diarrhea,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Functional diarrhea.
+K58.9,Irritable bowel syndrome without diarrhea,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Irritable bowel syndrome without diarrhea."
+K57.30,Diverticulosis of large intestine without perforation,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Diverticulosis of large intestine without perforation.
+K57.32,Diverticulitis of large intestine without perforation,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Diverticulitis of large intestine without perforation."
+K35.80,Acute appendicitis unspecified,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Acute appendicitis unspecified.
+K37,Unspecified appendicitis,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Unspecified appendicitis."
+K40.90,Unilateral inguinal hernia without obstruction,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Unilateral inguinal hernia without obstruction.
+K42.9,Umbilical hernia without obstruction,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Umbilical hernia without obstruction."
+K44.9,Diaphragmatic hernia without obstruction,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Diaphragmatic hernia without obstruction.
+K56.609,Unspecified intestinal obstruction,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Unspecified intestinal obstruction."
+K62.5,Hemorrhage of anus and rectum,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Hemorrhage of anus and rectum.
+R10.9,Abdominal pain unspecified,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Abdominal pain unspecified."
+R11.2,Nausea with vomiting,Gastroenterology,Upper or lower GI symptoms with tenderness and digestive upset. Clinical clue: Nausea with vomiting.
+R19.7,Diarrhea unspecified,Gastroenterology,"Abdominal pain, nausea, appetite changes, and gastrointestinal discomfort. Clinical clue: Diarrhea unspecified."
+G44.1,Vascular headache not elsewhere classified,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Vascular headache not elsewhere classified.
+G40.909,Epilepsy unspecified not intractable,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Epilepsy unspecified not intractable."
+G40.901,Epilepsy unspecified intractable,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Epilepsy unspecified intractable.
+G35,Multiple sclerosis,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Multiple sclerosis."
+G62.9,Polyneuropathy unspecified,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Polyneuropathy unspecified.
+G56.00,Carpal tunnel syndrome unspecified upper limb,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Carpal tunnel syndrome unspecified upper limb."
+G47.00,Insomnia unspecified,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Insomnia unspecified.
+G47.33,Obstructive sleep apnea adult,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Obstructive sleep apnea adult."
+G25.81,Restless legs syndrome,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Restless legs syndrome.
+R42,Dizziness and giddiness,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Dizziness and giddiness."
+R51.9,Headache unspecified,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Headache unspecified.
+R41.3,Other amnesia,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Other amnesia."
+F03.90,Unspecified dementia without behavioral disturbance,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Unspecified dementia without behavioral disturbance.
+M54.2,Cervicalgia,Neurology,"Headache, weakness, sensory change, or focal neurologic symptoms. Clinical clue: Cervicalgia."
+M54.50,Low back pain unspecified,Neurology,Neurologic complaints with altered function or movement symptoms. Clinical clue: Low back pain unspecified.
+E11.65,Type 2 diabetes mellitus with hyperglycemia,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Type 2 diabetes mellitus with hyperglycemia."
+E11.22,Type 2 diabetes mellitus with diabetic chronic kidney disease,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Type 2 diabetes mellitus with diabetic chronic kidney disease.
+E10.9,Type 1 diabetes mellitus without complications,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Type 1 diabetes mellitus without complications."
+E78.0,Pure hypercholesterolemia,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Pure hypercholesterolemia.
+E78.1,Pure hyperglyceridemia,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Pure hyperglyceridemia."
+E06.3,Autoimmune thyroiditis,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Autoimmune thyroiditis.
+E04.1,Nontoxic single thyroid nodule,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Nontoxic single thyroid nodule."
+E27.40,Adrenocortical insufficiency unspecified,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Adrenocortical insufficiency unspecified.
+E23.0,Hypopituitarism,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Hypopituitarism."
+M81.0,Age-related osteoporosis without fracture,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Age-related osteoporosis without fracture.
+M85.80,Other specified disorders of bone density,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Other specified disorders of bone density."
+R63.5,Abnormal weight gain,Endocrinology,Hormonal imbalance signs with systemic energy and appetite changes. Clinical clue: Abnormal weight gain.
+R63.4,Abnormal weight loss,Endocrinology,"Metabolic symptoms such as thirst, fatigue, or weight changes. Clinical clue: Abnormal weight loss."
+D50.9,Iron deficiency anemia unspecified,Hematology,Symptoms suggestive of anemia or hematologic dysregulation. Clinical clue: Iron deficiency anemia unspecified.
+D64.9,Anemia unspecified,Hematology,"Fatigue, pallor, bleeding tendency, or blood-count related symptoms. Clinical clue: Anemia unspecified."
+D69.6,Thrombocytopenia unspecified,Hematology,Symptoms suggestive of anemia or hematologic dysregulation. Clinical clue: Thrombocytopenia unspecified.
+D72.829,Elevated white blood cell count,Hematology,"Fatigue, pallor, bleeding tendency, or blood-count related symptoms. Clinical clue: Elevated white blood cell count."
+D68.9,Coagulation defect unspecified,Hematology,Symptoms suggestive of anemia or hematologic dysregulation. Clinical clue: Coagulation defect unspecified.
+D70.9,Neutropenia unspecified,Hematology,"Fatigue, pallor, bleeding tendency, or blood-count related symptoms. Clinical clue: Neutropenia unspecified."
+D57.1,Sickle-cell disease without crisis,Hematology,Symptoms suggestive of anemia or hematologic dysregulation. Clinical clue: Sickle-cell disease without crisis.
+C91.10,Chronic lymphocytic leukemia not in remission,Hematology,"Fatigue, pallor, bleeding tendency, or blood-count related symptoms. Clinical clue: Chronic lymphocytic leukemia not in remission."
+C92.00,Acute myeloblastic leukemia not in remission,Hematology,Symptoms suggestive of anemia or hematologic dysregulation. Clinical clue: Acute myeloblastic leukemia not in remission.
+C90.00,Multiple myeloma not having achieved remission,Hematology,"Fatigue, pallor, bleeding tendency, or blood-count related symptoms. Clinical clue: Multiple myeloma not having achieved remission."
+N17.9,Acute kidney failure unspecified,Nephrology,Renal-related symptoms with fluid imbalance or urinary abnormalities. Clinical clue: Acute kidney failure unspecified.
+N18.9,Chronic kidney disease unspecified,Nephrology,"Flank discomfort, urinary changes, edema, or renal-function concerns. Clinical clue: Chronic kidney disease unspecified."
+N18.3,Chronic kidney disease stage 3,Nephrology,Renal-related symptoms with fluid imbalance or urinary abnormalities. Clinical clue: Chronic kidney disease stage 3.
+N18.4,Chronic kidney disease stage 4,Nephrology,"Flank discomfort, urinary changes, edema, or renal-function concerns. Clinical clue: Chronic kidney disease stage 4."
+N18.6,End stage renal disease,Nephrology,Renal-related symptoms with fluid imbalance or urinary abnormalities. Clinical clue: End stage renal disease.
+N20.0,Calculus of kidney,Nephrology,"Flank discomfort, urinary changes, edema, or renal-function concerns. Clinical clue: Calculus of kidney."
+N13.30,Unspecified hydronephrosis,Nephrology,Renal-related symptoms with fluid imbalance or urinary abnormalities. Clinical clue: Unspecified hydronephrosis.
+N04.9,Nephrotic syndrome with unspecified morphologic changes,Nephrology,"Flank discomfort, urinary changes, edema, or renal-function concerns. Clinical clue: Nephrotic syndrome with unspecified morphologic changes."
+R31.9,Hematuria unspecified,Nephrology,Renal-related symptoms with fluid imbalance or urinary abnormalities. Clinical clue: Hematuria unspecified.
+R80.9,Proteinuria unspecified,Nephrology,"Flank discomfort, urinary changes, edema, or renal-function concerns. Clinical clue: Proteinuria unspecified."
+M17.9,Osteoarthritis of knee unspecified,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Osteoarthritis of knee unspecified.
+M16.9,Osteoarthritis of hip unspecified,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Osteoarthritis of hip unspecified."
+M19.90,Unspecified osteoarthritis unspecified site,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Unspecified osteoarthritis unspecified site.
+M25.561,Pain in right knee,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Pain in right knee."
+M25.562,Pain in left knee,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Pain in left knee.
+M79.671,Pain in right foot,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Pain in right foot."
+M79.672,Pain in left foot,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Pain in left foot.
+M54.16,Radiculopathy lumbar region,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Radiculopathy lumbar region."
+M51.26,Other intervertebral disc displacement lumbar region,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Other intervertebral disc displacement lumbar region.
+S72.001A,Fracture of unspecified part of neck of right femur initial encounter,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Fracture of unspecified part of neck of right femur initial encounter."
+S72.002A,Fracture of unspecified part of neck of left femur initial encounter,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Fracture of unspecified part of neck of left femur initial encounter.
+S52.501A,Unspecified fracture of lower end of right radius initial encounter,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Unspecified fracture of lower end of right radius initial encounter."
+S52.502A,Unspecified fracture of lower end of left radius initial encounter,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Unspecified fracture of lower end of left radius initial encounter.
+S82.201A,Unspecified fracture of shaft of right tibia initial encounter,Orthopedics,"Joint pain, reduced mobility, tenderness, or musculoskeletal injury signs. Clinical clue: Unspecified fracture of shaft of right tibia initial encounter."
+S82.202A,Unspecified fracture of shaft of left tibia initial encounter,Orthopedics,Localized bone or soft tissue pain with movement limitation. Clinical clue: Unspecified fracture of shaft of left tibia initial encounter.
+L20.9,Atopic dermatitis unspecified,Dermatology,"Skin lesion, rash, itching, or localized inflammatory skin changes. Clinical clue: Atopic dermatitis unspecified."
+L30.9,Dermatitis unspecified,Dermatology,"Cutaneous irritation, redness, or chronic skin symptom pattern. Clinical clue: Dermatitis unspecified."
+L40.9,Psoriasis unspecified,Dermatology,"Skin lesion, rash, itching, or localized inflammatory skin changes. Clinical clue: Psoriasis unspecified."
+L50.9,Urticaria unspecified,Dermatology,"Cutaneous irritation, redness, or chronic skin symptom pattern. Clinical clue: Urticaria unspecified."
+L70.0,Acne vulgaris,Dermatology,"Skin lesion, rash, itching, or localized inflammatory skin changes. Clinical clue: Acne vulgaris."
+L71.9,Rosacea unspecified,Dermatology,"Cutaneous irritation, redness, or chronic skin symptom pattern. Clinical clue: Rosacea unspecified."
+L82.1,Seborrheic keratosis,Dermatology,"Skin lesion, rash, itching, or localized inflammatory skin changes. Clinical clue: Seborrheic keratosis."
+L98.9,Disorder of skin and subcutaneous tissue unspecified,Dermatology,"Cutaneous irritation, redness, or chronic skin symptom pattern. Clinical clue: Disorder of skin and subcutaneous tissue unspecified."
+L89.90,Pressure ulcer unspecified site unspecified stage,Dermatology,"Skin lesion, rash, itching, or localized inflammatory skin changes. Clinical clue: Pressure ulcer unspecified site unspecified stage."
+L97.909,Non-pressure chronic ulcer unspecified part of unspecified lower leg,Dermatology,"Cutaneous irritation, redness, or chronic skin symptom pattern. Clinical clue: Non-pressure chronic ulcer unspecified part of unspecified lower leg."
+F41.1,Generalized anxiety disorder,Psychiatry,"Mood or anxiety symptoms affecting sleep, concentration, and behavior. Clinical clue: Generalized anxiety disorder."
+F41.9,Anxiety disorder unspecified,Psychiatry,Psychological distress with functional impairment and emotional changes. Clinical clue: Anxiety disorder unspecified.
+F32.9,Major depressive disorder single episode unspecified,Psychiatry,"Mood or anxiety symptoms affecting sleep, concentration, and behavior. Clinical clue: Major depressive disorder single episode unspecified."
+F33.1,Major depressive disorder recurrent moderate,Psychiatry,Psychological distress with functional impairment and emotional changes. Clinical clue: Major depressive disorder recurrent moderate.
+F31.9,Bipolar disorder unspecified,Psychiatry,"Mood or anxiety symptoms affecting sleep, concentration, and behavior. Clinical clue: Bipolar disorder unspecified."
+F20.9,Schizophrenia unspecified,Psychiatry,Psychological distress with functional impairment and emotional changes. Clinical clue: Schizophrenia unspecified.
+F90.9,Attention-deficit hyperactivity disorder unspecified type,Psychiatry,"Mood or anxiety symptoms affecting sleep, concentration, and behavior. Clinical clue: Attention-deficit hyperactivity disorder unspecified type."
+F43.10,Post-traumatic stress disorder unspecified,Psychiatry,Psychological distress with functional impairment and emotional changes. Clinical clue: Post-traumatic stress disorder unspecified.
+F10.20,Alcohol dependence uncomplicated,Psychiatry,"Mood or anxiety symptoms affecting sleep, concentration, and behavior. Clinical clue: Alcohol dependence uncomplicated."
+F11.20,Opioid dependence uncomplicated,Psychiatry,Psychological distress with functional impairment and emotional changes. Clinical clue: Opioid dependence uncomplicated.
+H66.90,Otitis media unspecified unspecified ear,ENT,"Ear, nose, throat, or vision-adjacent symptoms with local discomfort. Clinical clue: Otitis media unspecified unspecified ear."
+H60.90,Otitis externa unspecified unspecified ear,ENT,Upper airway or sensory complaints with local irritation. Clinical clue: Otitis externa unspecified unspecified ear.
+H61.23,Impacted cerumen bilateral,ENT,"Ear, nose, throat, or vision-adjacent symptoms with local discomfort. Clinical clue: Impacted cerumen bilateral."
+H10.9,Conjunctivitis unspecified,ENT,Upper airway or sensory complaints with local irritation. Clinical clue: Conjunctivitis unspecified.
+H25.9,Age-related cataract unspecified,ENT,"Ear, nose, throat, or vision-adjacent symptoms with local discomfort. Clinical clue: Age-related cataract unspecified."
+H40.9,Glaucoma unspecified,ENT,Upper airway or sensory complaints with local irritation. Clinical clue: Glaucoma unspecified.
+H52.4,Presbyopia,ENT,"Ear, nose, throat, or vision-adjacent symptoms with local discomfort. Clinical clue: Presbyopia."
+R09.81,Nasal congestion,ENT,Upper airway or sensory complaints with local irritation. Clinical clue: Nasal congestion.
+R49.0,Dysphonia,ENT,"Ear, nose, throat, or vision-adjacent symptoms with local discomfort. Clinical clue: Dysphonia."
+R13.10,Dysphagia unspecified,ENT,Upper airway or sensory complaints with local irritation. Clinical clue: Dysphagia unspecified.
+O80,Encounter for full-term uncomplicated delivery,Obstetrics,Pregnancy-related symptoms requiring maternal assessment. Clinical clue: Encounter for full-term uncomplicated delivery.
+O21.9,Vomiting of pregnancy unspecified,Obstetrics,Gestational presentation with obstetric monitoring needs. Clinical clue: Vomiting of pregnancy unspecified.
+O24.419,Gestational diabetes mellitus in pregnancy unspecified control,Obstetrics,Pregnancy-related symptoms requiring maternal assessment. Clinical clue: Gestational diabetes mellitus in pregnancy unspecified control.
+O13.9,Gestational hypertension without significant proteinuria,Obstetrics,Gestational presentation with obstetric monitoring needs. Clinical clue: Gestational hypertension without significant proteinuria.
+O99.013,Anemia complicating pregnancy third trimester,Obstetrics,Pregnancy-related symptoms requiring maternal assessment. Clinical clue: Anemia complicating pregnancy third trimester.
+Z34.90,Encounter for supervision of normal pregnancy unspecified trimester,Obstetrics,Gestational presentation with obstetric monitoring needs. Clinical clue: Encounter for supervision of normal pregnancy unspecified trimester.
+N91.2,Amenorrhea unspecified,Gynecology,"Pelvic symptoms, menstrual changes, or reproductive tract discomfort. Clinical clue: Amenorrhea unspecified."
+N92.0,Excessive and frequent menstruation with regular cycle,Gynecology,Gynecologic complaints with cycle or lower abdominal symptoms. Clinical clue: Excessive and frequent menstruation with regular cycle.
+N94.6,Dysmenorrhea unspecified,Gynecology,"Pelvic symptoms, menstrual changes, or reproductive tract discomfort. Clinical clue: Dysmenorrhea unspecified."
+N76.0,Acute vaginitis,Gynecology,Gynecologic complaints with cycle or lower abdominal symptoms. Clinical clue: Acute vaginitis.
+N80.9,Endometriosis unspecified,Gynecology,"Pelvic symptoms, menstrual changes, or reproductive tract discomfort. Clinical clue: Endometriosis unspecified."
+Z30.09,Encounter for other general counseling and advice on contraception,Gynecology,Gynecologic complaints with cycle or lower abdominal symptoms. Clinical clue: Encounter for other general counseling and advice on contraception.

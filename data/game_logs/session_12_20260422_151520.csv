@@ -1,0 +1,10 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T08:14:49Z,case_start,R10.9,Gastroenterology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T08:14:53Z,submit,R10.9,Gastroenterology,R10.9,1,4,0,5,0.000,26,30,92,125
+2026-04-22T08:14:57Z,case_start,L40.9,Dermatology,,0,0,0,5,0.000,30,30,92,125
+2026-04-22T08:15:08Z,submit,L40.9,Dermatology,L98.9,0,11,0,5,0.000,19,30,50,100
+2026-04-22T08:15:11Z,submit,L40.9,Dermatology,N39.0,0,13,0,5,0.000,17,30,26,75
+2026-04-22T08:15:11Z,submit,L40.9,Dermatology,N39.0,0,13,0,5,0.000,16,30,4,50
+2026-04-22T08:15:12Z,skip,L40.9,Dermatology,,0,0,0,5,0.000,16,30,0,50
+2026-04-22T08:15:12Z,game_over:stability,L40.9,Dermatology,,0,0,0,0,0.000,16,0,0,50
+2026-04-22T08:15:12Z,log_saved,,,12::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_12_20260422_151512.csv,0,0,0,0,0.000,16,30,0,50

@@ -1,0 +1,11 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T08:07:00Z,case_start,J93.9,Respiratory,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T08:07:18Z,submit,J93.9,Respiratory,J45.909,0,17,1,5,0.200,13,30,46,-25
+2026-04-22T08:07:26Z,submit,J93.9,Respiratory,J45.909,0,25,1,5,0.200,5,30,10,-50
+2026-04-22T08:07:30Z,game_over:timeout,J93.9,Respiratory,,0,0,0,0,0.000,0,0,0,-50
+2026-04-22T08:07:30Z,log_saved,,,sd::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_sd_20260422_150730.csv,0,0,0,0,0.000,0,30,0,-50
+2026-04-22T08:07:51Z,case_start,E11.65,Endocrinology,,0,0,0,6,0.000,30,30,100,0
+2026-04-22T08:08:00Z,submit,E11.65,Endocrinology,J01.90,0,8,0,6,0.000,22,30,64,-25
+2026-04-22T08:08:20Z,submit,E11.65,Endocrinology,I50.9,0,29,0,6,0.000,2,30,4,-50
+2026-04-22T08:08:21Z,submit,E11.65,Endocrinology,I50.9,0,29,0,6,0.000,1,30,0,-75
+2026-04-22T08:08:21Z,game_over:stability,E11.65,Endocrinology,,0,0,0,0,0.000,1,0,0,-75

@@ -1,0 +1,3 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T08:00:45Z,case_start,M16.9,Orthopedics,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T08:00:48Z,game_over:ended,M16.9,Orthopedics,,0,0,0,0,0.000,28,0,96,0

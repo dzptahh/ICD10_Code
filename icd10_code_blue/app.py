@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 from .controller import GameController
+from .cases import load_cases_csv
 from .icd_database import ICD_Database
 from .stats import StatsTracker
 from .ui import UI_Manager
@@ -29,6 +30,12 @@ def run_app() -> None:
 
     stats = StatsTracker(global_csv_path=global_csv)
     controller = GameController(db=db, stats=stats)
+    try:
+        # Single-source dataset: game cases are loaded from the same ICD CSV.
+        controller.load_cases(load_cases_csv(icd_csv))
+    except Exception:
+        # Keep the app playable with fallback generated cases if sample cases fail to load.
+        pass
 
     root = tk.Tk()
     UI_Manager(

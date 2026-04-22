@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -51,6 +52,15 @@ class ICD_Database:
         denom = max(len(n), len(h))
         return 0.0 if denom == 0 else max(0.0, 1.0 - dist / denom)
 
+    @staticmethod
+    def _norm(s: str) -> str:
+        return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+    @classmethod
+    def _tokens(cls, s: str) -> list[str]:
+        n = cls._norm(s)
+        return [t for t in n.split() if t]
+
     def load_data(self, file_path: str | Path) -> None:
         path = Path(file_path)
         if not path.exists():
@@ -87,17 +97,61 @@ class ICD_Database:
         if not kw:
             return []
 
+        q_norm = self._norm(kw)
+        q_tokens = self._tokens(kw)
+        q_compact = re.sub(r"[^a-z0-9]+", "", kw)
+
         scored: list[tuple[float, ICDEntry]] = []
         for e in self.entries:
-            s_code = self._similarity(kw, e.code)
+            code = e.code
+            code_l = code.lower()
+            code_compact = re.sub(r"[^a-z0-9]+", "", code_l)
+            desc_l = e.description.lower()
+            cat_l = e.category.lower()
+            combined = f"{e.description} {e.category}"
+            combined_norm = self._norm(combined)
+            combined_tokens = self._tokens(combined)
+
+            # Strong ranking signals first.
+            score = 0.0
+            if q_compact and code_compact == q_compact:
+                score += 7.0  # exact code hit should always float to top
+            elif q_compact and code_compact.startswith(q_compact):
+                score += 4.8
+            elif kw and code_l.startswith(kw):
+                score += 4.2
+
+            if q_norm and q_norm in desc_l:
+                score += 2.6
+            if q_norm and q_norm in cat_l:
+                score += 1.8
+
+            # Token coverage helps multi-word queries rank better.
+            if q_tokens:
+                covered = sum(1 for t in q_tokens if t in combined_tokens)
+                prefix_covered = sum(1 for t in q_tokens if any(tok.startswith(t) for tok in combined_tokens))
+                score += 1.8 * (covered / len(q_tokens))
+                score += 0.9 * (prefix_covered / len(q_tokens))
+
+            # Fuzzy fallback so typos still return useful results.
+            s_code = self._similarity(kw, code)
             s_desc = self._similarity(kw, e.description)
             s_cat = self._similarity(kw, e.category)
-            score = max(s_code, s_desc * 0.95, s_cat * 0.7)
-            if score <= 0.05:
+            s_comb = self._similarity(q_norm or kw, combined_norm)
+            score += (s_code * 1.2) + (s_desc * 0.9) + (s_cat * 0.5) + (s_comb * 0.8)
+
+            if score <= 0.65:
                 continue
             scored.append((score, e))
 
-        scored.sort(key=lambda t: (-t[0], t[1].category.lower(), t[1].code))
+        scored.sort(
+            key=lambda t: (
+                -t[0],
+                t[1].code.lower(),
+                t[1].category.lower(),
+                t[1].description.lower(),
+            )
+        )
         return [e for _s, e in scored[:limit]]
 
     def filter_by_category(self, category: str) -> list[ICDEntry]:

@@ -9,6 +9,7 @@ from pathlib import Path
 class PatientCase:
     symptoms: str
     correct_code: str
+    description: str = ""
 
 
 def load_cases_csv(path: str | Path) -> list[PatientCase]:
@@ -18,19 +19,25 @@ def load_cases_csv(path: str | Path) -> list[PatientCase]:
 
     with p.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        required = {"symptoms", "correct_code"}
-        if not reader.fieldnames or not required.issubset(set(reader.fieldnames)):
+        fields = set(reader.fieldnames or [])
+        legacy_required = {"symptoms", "correct_code"}
+        unified_required = {"code", "description", "symptoms"}
+        has_legacy = legacy_required.issubset(fields)
+        has_unified = unified_required.issubset(fields)
+        if not reader.fieldnames or (not has_legacy and not has_unified):
             raise ValueError(
-                "Cases CSV must have headers: symptoms, correct_code "
+                "Cases CSV must have either headers: symptoms, correct_code "
+                "or unified headers: code, description, symptoms "
                 f"(got: {reader.fieldnames})"
             )
         cases: list[PatientCase] = []
         for row in reader:
             sym = (row.get("symptoms") or "").strip()
-            code = (row.get("correct_code") or "").strip().upper()
+            desc = (row.get("description") or "").strip()
+            code = ((row.get("correct_code") if has_legacy else row.get("code")) or "").strip().upper()
             if not sym or not code:
                 continue
-            cases.append(PatientCase(symptoms=sym, correct_code=code))
+            cases.append(PatientCase(symptoms=sym, correct_code=code, description=desc))
     if not cases:
         raise ValueError("Cases CSV loaded 0 valid rows.")
     return cases

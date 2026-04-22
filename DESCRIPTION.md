@@ -24,7 +24,7 @@ ICD-10 coding is essential for healthcare documentation, but learning it is diff
   - Statistics dashboard: `screenshots/visualization`  
   - Full screenshot folder: [screenshots/](screenshots/)
 - **Proposal (PDF):**  
-[ICD-10 Code Blue Proposal](./ICD-10 Code Blue Danita.pdf)
+[ICD-10 Code Blue Proposal](./ICD10_Code_Blue_Proposal.pdf)
 - **YouTube Presentation (~7 minutes):**  
 Video link here: `[YouTube Presentation](PASTE_YOUTUBE_LINK)`
 

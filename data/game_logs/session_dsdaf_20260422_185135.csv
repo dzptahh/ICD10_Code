@@ -1,0 +1,11 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T11:51:00Z,case_start,R10.9,Gastroenterology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T11:51:06Z,submit,R10.9,Gastroenterology,,0,6,0,5,0.000,21,30,0,-25
+2026-04-22T11:51:12Z,submit,R10.9,Gastroenterology,R10.9,1,12,0,5,0.000,15,30,0,100
+2026-04-22T11:51:14Z,case_start,N18.9,Nephrology,,0,0,0,5,0.000,30,30,0,100
+2026-04-22T11:51:29Z,submit,N18.9,Nephrology,N18.9,1,15,0,5,0.000,14,30,0,200
+2026-04-22T11:51:30Z,case_start,I35.0,Cardiology,,0,0,0,5,0.000,30,30,0,200
+2026-04-22T11:51:32Z,submit,I35.0,Cardiology,N18.4,0,2,0,5,0.000,25,30,0,175
+2026-04-22T11:51:33Z,submit,I35.0,Cardiology,N18.4,0,3,0,5,0.000,22,30,0,150
+2026-04-22T11:51:34Z,submit,I35.0,Cardiology,N18.4,0,3,0,5,0.000,20,30,0,125
+2026-04-22T11:51:35Z,game_over:ended,I35.0,Cardiology,,0,0,0,0,0.000,18,0,0,125

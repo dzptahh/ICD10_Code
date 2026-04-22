@@ -1,12 +1,7 @@
-# Core dependencies for ICD10 Code Game
- 
-# Fuzzy string matching for handbook search
-rapidfuzz>=3.0.0
- 
-# Data handling (if using CSV/JSON ICD-10 datasets)
-pandas>=2.0.0
- 
-# Terminal UI / colored output (optional but recommended)
-colorama>=0.4.6
-rich>=13.0.0
+# ICD10 Code Blue dependencies
+#
+# This project currently uses only Python standard library modules:
+# tkinter, csv, pathlib, datetime, dataclasses, enum, math, random.
+#
+# Keep this file for assignment structure compatibility.
  

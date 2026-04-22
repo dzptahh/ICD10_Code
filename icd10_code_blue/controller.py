@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import random
 from dataclasses import dataclass
 from enum import Enum
@@ -44,7 +45,7 @@ class GameController:
         self.game_state: GameState = GameState.MENU
         self.score: int = 0
         self.time_limit_s: int = self.config.base_seconds_per_case
-        self.time_remaining: int = self.time_limit_s
+        self.time_remaining: float = float(self.time_limit_s)
         self.stability: int = self.config.max_stability
         self.case_index: int = 0
         self.current_patient: Patient | None = None
@@ -122,18 +123,15 @@ class GameController:
 
         self.case_index += 1
         self.time_limit_s = self._compute_time_limit()
-        self.time_remaining = self.time_limit_s
+        self.time_remaining = float(self.time_limit_s)
         self._case_clock_started = False
         case = self._pick_next_case()
         if case is not None:
             self._active_correct_code = case.correct_code.strip().upper()
             self._active_entry = self.db.get_by_code(self._active_correct_code)
             self._active_category = self._active_entry.category if self._active_entry else "Uncategorized"
-            prompt = case.symptoms
-            if case.description:
-                prompt = f"Symptoms: {case.symptoms}\n\nClinical description: {case.description}"
             self.current_patient = Patient(
-                symptoms_text=prompt,
+                symptoms_text=case.symptoms,
                 correct_code=self._active_correct_code,
                 category=self._active_category,
             )
@@ -177,13 +175,13 @@ class GameController:
             score=self.score,
         )
 
-    def tick(self) -> None:
+    def tick(self, elapsed_s: float = 1.0) -> None:
         if self.game_state != GameState.PLAYING:
             return
         if not self._case_clock_started:
             return
 
-        self.time_remaining = max(0, self.time_remaining - 1)
+        self.time_remaining = max(0.0, self.time_remaining - max(0.0, float(elapsed_s)))
         self.stability = max(0, self.stability - self.config.stability_decay_per_second)
 
         if self.time_remaining <= 0:
@@ -228,7 +226,7 @@ class GameController:
 
         self._wrong_streak += 1
         self.score += self.config.points_wrong
-        self.time_remaining = max(0, self.time_remaining - self.config.time_penalty_wrong_submit_s)
+        self.time_remaining = max(0.0, self.time_remaining - float(self.config.time_penalty_wrong_submit_s))
         self.stability = max(0, self.stability - self.config.stability_penalty_wrong)
         self.stats.log_attempt(
             event="submit",
@@ -248,6 +246,9 @@ class GameController:
             self.end_game(reason="timeout")
             return False, "Wrong. Time is up."
         return False, f"Wrong. -{abs(self.config.points_wrong)} points. Review the correct code in final results."
+
+    def display_time_remaining_s(self) -> int:
+        return max(0, math.ceil(self.time_remaining))
 
     def skip_case(self) -> None:
         if self.game_state != GameState.PLAYING or not self._active_correct_code:

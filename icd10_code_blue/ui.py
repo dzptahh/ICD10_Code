@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -57,6 +59,8 @@ class UI_Manager:
 
         self._timer_job: str | None = None
         self._chart_redraw_job: str | None = None
+        self._last_tick_ts: float | None = None
+        self._brief_elapsed_accum: float = 0.0
         self.current_username: str = ""
 
         self._build_layout()
@@ -673,6 +677,8 @@ class UI_Manager:
 
     def _start_timer(self) -> None:
         self._stop_timer()
+        self._last_tick_ts = time.perf_counter()
+        self._brief_elapsed_accum = 0.0
         self._schedule_tick()
 
     def _stop_timer(self) -> None:
@@ -682,18 +688,25 @@ class UI_Manager:
             except tk.TclError:
                 pass
             self._timer_job = None
+        self._last_tick_ts = None
 
     def _schedule_tick(self) -> None:
-        self._timer_job = self.root.after(1000, self._on_tick)
+        self._timer_job = self.root.after(100, self._on_tick)
 
     def _on_tick(self) -> None:
+        now = time.perf_counter()
+        elapsed = 0.0 if self._last_tick_ts is None else max(0.0, now - self._last_tick_ts)
+        self._last_tick_ts = now
         if self._in_briefing:
-            self._brief_remaining_s = max(0, self._brief_remaining_s - 1)
+            self._brief_elapsed_accum += elapsed
+            while self._brief_elapsed_accum >= 1.0 and self._brief_remaining_s > 0:
+                self._brief_elapsed_accum -= 1.0
+                self._brief_remaining_s -= 1
             self.brief_countdown.set(f"Briefing ends in {self._brief_remaining_s}s")
             if self._brief_remaining_s <= 0:
                 self._enter_play_phase()
         else:
-            self.controller.tick()
+            self.controller.tick(elapsed)
             if self.controller.game_state == GameState.GAME_OVER:
                 self.show_game_over()
                 return
@@ -738,17 +751,18 @@ class UI_Manager:
         self._refresh_hud()
 
     def _refresh_hud(self) -> None:
-        self.time_var.set(f"Time: {self.controller.time_remaining}s / {self.controller.time_limit_s}s")
+        display_remaining = self.controller.display_time_remaining_s()
+        self.time_var.set(f"Time: {display_remaining}s / {self.controller.time_limit_s}s")
         self._draw_pressure_monitor(self.controller.time_remaining, self.controller.time_limit_s)
 
-    def _draw_pressure_monitor(self, remaining_s: int, limit_s: int) -> None:
+    def _draw_pressure_monitor(self, remaining_s: float, limit_s: int) -> None:
         if not hasattr(self, "pressure_canvas"):
             return
         if not self.pressure_canvas.winfo_exists():
             return
 
         limit = max(1, int(limit_s))
-        rem = max(0, min(int(remaining_s), limit))
+        rem = max(0.0, min(float(remaining_s), float(limit)))
         pressure_ratio = 1.0 - (rem / limit)
         pressure_pct = int(pressure_ratio * 100)
         self.pressure_var.set(f"Patient Pressure: {pressure_pct}%")
@@ -757,7 +771,8 @@ class UI_Manager:
         c.delete("all")
 
         x0, y0, x1, y1 = 10, 24, 248, 42
-        c.create_text(x0, 10, anchor="w", text=f"{rem}s left", fill=self.p.text, font=("Helvetica", 10, "bold"))
+        rem_display = max(0, math.ceil(rem))
+        c.create_text(x0, 10, anchor="w", text=f"{rem_display}s left", fill=self.p.text, font=("Helvetica", 10, "bold"))
         c.create_text(x1, 10, anchor="e", text=f"/ {limit}s", fill=self.p.muted, font=("Helvetica", 9))
 
         c.create_rectangle(x0, y0, x1, y1, fill="#f0f4fa", outline=self.p.border, width=1)

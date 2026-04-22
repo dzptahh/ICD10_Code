@@ -56,6 +56,7 @@ class UI_Manager:
         self.root.configure(background=self.p.bg)
 
         self._timer_job: str | None = None
+        self._chart_redraw_job: str | None = None
         self.current_username: str = ""
 
         self._build_layout()
@@ -554,6 +555,7 @@ class UI_Manager:
 
         self.chart = tk.Canvas(chart_box, background="#ffffff", highlightthickness=1, highlightbackground=self.p.border)
         self.chart.grid(row=1, column=0, sticky="nsew")
+        self.chart.bind("<Configure>", self._on_chart_resize)
 
         # Result actions are shown in header beside the RESULTS badge.
 
@@ -850,21 +852,52 @@ class UI_Manager:
         self.chart.update_idletasks()
         w = self.chart.winfo_width()
         h = self.chart.winfo_height()
-        return (max(420, w), max(320, h))
+        # Prefer a slightly larger minimum to keep text readable.
+        return (max(520, w), max(360, h))
+
+    def _draw_grid(self, x0: int, y0: int, x1: int, y1: int, *, x_ticks: int = 5, y_ticks: int = 5) -> None:
+        c = self.chart
+        grid = "#e9eef6"
+        for i in range(1, x_ticks):
+            x = x0 + (x1 - x0) * (i / x_ticks)
+            c.create_line(x, y0, x, y1, fill=grid)
+        for i in range(1, y_ticks):
+            y = y0 - (y0 - y1) * (i / y_ticks)
+            c.create_line(x0, y, x1, y, fill=grid)
 
     def _draw_axes(self, title: str, x_label: str, y_label: str) -> tuple[int, int, int, int]:
         c = self.chart
         c.delete("all")
         w, h = self._canvas_dims()
-        pad = 46
-        c.create_text(12, 10, anchor="nw", text=title, font=("Helvetica", 12, "bold"))
+        pad_left = 62
+        pad_bottom = 56
+        pad_top = 46
+        c.create_text(14, 12, anchor="nw", text=title, font=("Helvetica", 13, "bold"), fill="#132033")
         # axes
-        x0, y0, x1, y1 = pad, h - pad, w - 16, 40
-        c.create_line(x0, y0, x1, y0, fill="#333")
-        c.create_line(x0, y0, x0, y1, fill="#333")
-        c.create_text((x0 + x1) / 2, h - 10, anchor="s", text=x_label, fill="#333")
-        c.create_text(10, (y0 + y1) / 2, anchor="w", text=y_label, angle=90, fill="#333")
+        x0, y0, x1, y1 = pad_left, h - pad_bottom, w - 22, pad_top
+        self._draw_grid(x0, y0, x1, y1, x_ticks=6, y_ticks=6)
+        c.create_line(x0, y0, x1, y0, fill="#334155", width=2)
+        c.create_line(x0, y0, x0, y1, fill="#334155", width=2)
+        c.create_text((x0 + x1) / 2, h - 18, anchor="s", text=x_label, fill="#334155", font=("Helvetica", 10))
+        c.create_text(16, (y0 + y1) / 2, anchor="w", text=y_label, angle=90, fill="#334155", font=("Helvetica", 10))
         return x0, y0, x1, y1
+
+    def _on_chart_resize(self, _e: tk.Event) -> None:
+        # Debounce redraw to avoid heavy re-render during window resize.
+        if self._chart_redraw_job is not None:
+            try:
+                self.root.after_cancel(self._chart_redraw_job)
+            except tk.TclError:
+                pass
+        self._chart_redraw_job = self.root.after(120, self._redraw_chart_now)
+
+    def _redraw_chart_now(self) -> None:
+        self._chart_redraw_job = None
+        if not hasattr(self, "chart") or not self.chart.winfo_exists():
+            return
+        if self.controller.game_state != GameState.GAME_OVER:
+            return
+        self._draw_selected_chart()
 
     def _draw_error_histogram(self) -> None:
         # Histogram of incorrect diagnoses: values are 0/1, so show counts of correct vs incorrect.
@@ -880,15 +913,15 @@ class UI_Manager:
 
         c = self.chart
         bar_w = (x1 - x0) / 3
-        for i, (label, count, color) in enumerate([("0", correct_n, "#2aa84a"), ("1", wrong_n, "#d64545")]):
+        for i, (label, count, color) in enumerate([("Correct", correct_n, "#2aa84a"), ("Incorrect", wrong_n, "#d64545")]):
             bx0 = x0 + (i + 0.5) * bar_w
             bx1 = bx0 + bar_w * 0.8
             height = (y0 - y1) * (count / max_n)
             by0 = y0
             by1 = y0 - height
-            c.create_rectangle(bx0, by1, bx1, by0, fill=color, outline="")
-            c.create_text((bx0 + bx1) / 2, y0 + 14, text=label, fill="#333")
-            c.create_text((bx0 + bx1) / 2, by1 - 10, text=str(count), fill="#111")
+            c.create_rectangle(bx0, by1, bx1, by0, fill=color, outline=self.p.border, width=1)
+            c.create_text((bx0 + bx1) / 2, y0 + 18, text=label, fill="#334155", font=("Helvetica", 10, "bold"))
+            c.create_text((bx0 + bx1) / 2, by1 - 14, text=str(count), fill="#132033", font=("Helvetica", 11, "bold"))
 
     def _draw_response_time_line(self) -> None:
         x0, y0, x1, y1 = self._draw_axes(
@@ -910,11 +943,11 @@ class UI_Manager:
             y = y0 - (y0 - y1) * (rt / max_rt)
             pts.append((x, y))
         for (ax, ay), (bx, by) in zip(pts, pts[1:]):
-            c.create_line(ax, ay, bx, by, fill="#2f6fed", width=2)
+            c.create_line(ax, ay, bx, by, fill=self.p.accent, width=3)
         for i, (x, y) in enumerate(pts, start=1):
-            c.create_oval(x - 3, y - 3, x + 3, y + 3, fill="#2f6fed", outline="")
+            c.create_oval(x - 4, y - 4, x + 4, y + 4, fill=self.p.accent, outline="")
             if i == 1 or i == n:
-                c.create_text(x, y - 10, text=str(rts[i - 1]), fill="#111")
+                c.create_text(x, y - 12, text=f"{rts[i - 1]}s", fill="#132033", font=("Helvetica", 10, "bold"))
 
     def _draw_category_distribution(self) -> None:
         x0, y0, x1, y1 = self._draw_axes(
@@ -928,13 +961,13 @@ class UI_Manager:
             return
 
         items = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0].lower()))
-        max_items = 8
+        max_items = 10
         if len(items) > max_items:
             items = items[:max_items]
         max_count = max(1, max(v for _k, v in items))
 
         c = self.chart
-        bar_gap = 8
+        bar_gap = 10
         total_w = x1 - x0
         bar_w = max(12, int((total_w - bar_gap * (len(items) - 1)) / len(items)))
         for i, (cat, v) in enumerate(items):
@@ -942,10 +975,12 @@ class UI_Manager:
             bx1 = bx0 + bar_w
             height = (y0 - y1) * (v / max_count)
             by1 = y0 - height
-            c.create_rectangle(bx0, by1, bx1, y0, fill="#7c4dff", outline="")
-            c.create_text((bx0 + bx1) / 2, by1 - 10, text=str(v), fill="#111")
+            c.create_rectangle(bx0, by1, bx1, y0, fill="#7c4dff", outline=self.p.border, width=1)
+            c.create_text((bx0 + bx1) / 2, by1 - 14, text=str(v), fill="#132033", font=("Helvetica", 10, "bold"))
             label = cat if len(cat) <= 10 else cat[:9] + "…"
-            c.create_text((bx0 + bx1) / 2, y0 + 14, text=label, fill="#333")
+            # rotate a bit for readability if many bars
+            angle = 0 if len(items) <= 7 else 25
+            c.create_text((bx0 + bx1) / 2, y0 + 22, text=label, fill="#334155", font=("Helvetica", 9), angle=angle)
 
     def _draw_accuracy_pie(self) -> None:
         c = self.chart
@@ -962,7 +997,7 @@ class UI_Manager:
         correct_pct = (correct_n / total) * 100
         wrong_pct = 100 - correct_pct
 
-        c.create_text(12, 10, anchor="nw", text="Accuracy Rate", font=("Helvetica", 12, "bold"))
+        c.create_text(14, 12, anchor="nw", text="Accuracy Rate", font=("Helvetica", 13, "bold"), fill="#132033")
         cx, cy, r = w * 0.42, h * 0.53, min(w, h) * 0.25
 
         start = 90.0
@@ -979,7 +1014,7 @@ class UI_Manager:
             outline="",
         )
 
-        c.create_oval(cx - r * 0.52, cy - r * 0.52, cx + r * 0.52, cy + r * 0.52, fill="#ffffff", outline="")
+        c.create_oval(cx - r * 0.52, cy - r * 0.52, cx + r * 0.52, cy + r * 0.52, fill="#ffffff", outline=self.p.border)
         c.create_text(cx, cy - 4, text=f"{correct_pct:.0f}% correct", fill="#132033", font=("Helvetica", 11, "bold"))
         c.create_text(cx, cy + 14, text=f"{correct_n}/{total}", fill="#5f6f86", font=("Helvetica", 10))
 

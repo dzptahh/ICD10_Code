@@ -1,0 +1,15 @@
+ts_utc,event,case_code,case_category,entered_code,correct,response_time_s,keystrokes,code_length,keystroke_efficiency,time_remaining_s,time_limit_s,stability,score
+2026-04-22T08:28:36Z,case_start,I20.0,Cardiology,,0,0,0,5,0.000,30,30,100,0
+2026-04-22T08:28:37Z,game_over:ended,I20.0,Cardiology,,0,0,0,0,0.000,29,0,98,0
+2026-04-22T08:28:37Z,log_saved,,,df::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_df_20260422_152837.csv,0,0,0,0,0.000,29,30,98,0
+2026-04-22T08:28:40Z,log_saved,,,df::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_df_20260422_152840.csv,0,0,0,0,0.000,29,30,98,0
+2026-04-22T08:28:42Z,case_start,E11.65,Endocrinology,,0,0,0,6,0.000,30,30,100,0
+2026-04-22T08:28:52Z,submit,E11.65,Endocrinology,O24.419,0,10,2,6,0.333,19,30,58,-25
+2026-04-22T08:28:56Z,submit,E11.65,Endocrinology,E11.22,0,13,2,6,0.333,16,30,32,-50
+2026-04-22T08:28:57Z,submit,E11.65,Endocrinology,E11.9,0,15,2,6,0.333,14,30,8,-75
+2026-04-22T08:28:59Z,submit,E11.65,Endocrinology,E11.65,1,16,2,6,0.333,13,30,6,25
+2026-04-22T08:29:02Z,case_start,I47.1,Cardiology,,0,0,0,5,0.000,30,30,6,25
+2026-04-22T08:29:04Z,submit,I47.1,Cardiology,O24.419,0,1,0,5,0.000,28,30,0,0
+2026-04-22T08:29:04Z,game_over:stability,I47.1,Cardiology,,0,0,0,0,0.000,28,0,0,0
+2026-04-22T08:29:04Z,log_saved,,,df::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_df_20260422_152904.csv,0,0,0,0,0.000,28,30,0,0
+2026-04-22T08:29:12Z,log_saved,,,df::/Users/datah/Desktop/2026/compro2/ICD10_Code/data/game_logs/session_df_20260422_152912.csv,0,0,0,0,0.000,28,30,0,0

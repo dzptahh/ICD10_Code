@@ -26,7 +26,7 @@ ICD-10 coding is essential for healthcare documentation, but learning it is diff
 - **Proposal (PDF):**  
 [ICD-10 Code Blue Proposal](./ICD10_Code_Blue_Proposal.pdf)
 - **YouTube Presentation (~7 minutes):**  
-Video link here: `[YouTube Presentation](PASTE_YOUTUBE_LINK)`
+Video link here: [YouTube Presentation](https://youtu.be/KAc76WjGmIs)
 
 ![Login1](screenshots/gameplay/Setup_Login.png) 
 > [!NOTE]

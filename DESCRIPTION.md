@@ -101,7 +101,7 @@ The motivation was to build a lightweight, interactive training experience that 
 
 ## 3. UML Class Diagram
 
-- UML diagram image (quick view): `screenshots/uml.png`  
+- UML diagram image (quick view): `[UML](ICD10_Code/UML.png)`  
 - UML submission file (required PDF): `docs/UML_Class_Diagram.pdf`
 
 The UML includes:

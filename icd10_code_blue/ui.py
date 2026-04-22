@@ -26,7 +26,7 @@ class Palette:
     text: str = "#132033"
     muted: str = "#5f6f86"
     accent: str = "#2d6cdf"
-    border: str = "#d8e1ec"
+    border: str = "#eef2f7"
     good: str = "#2aa84a"
     warn: str = "#f0b429"
     bad: str = "#d64545"
@@ -89,6 +89,8 @@ class UI_Manager:
         self.style.configure("Card.TFrame", background=self.p.panel, borderwidth=1, relief="solid", bordercolor="#eef2f7")
 
         self.style.configure("TLabelframe", background=self.p.panel, borderwidth=1, relief="solid")
+        # Lighter outlines for frames (gameplay screen)
+        self.style.configure("TLabelframe", bordercolor=self.p.border)
         self.style.configure("TLabelframe.Label", background=self.p.panel, foreground=self.p.text, font=("Helvetica", 11, "bold"))
         self.style.configure("TEntry", fieldbackground="#ffffff", foreground=self.p.text, bordercolor=self.p.border, padding=6)
         self.style.map("TEntry", bordercolor=[("focus", self.p.accent)])
@@ -409,15 +411,21 @@ class UI_Manager:
 
         pressure_wrap = ttk.Frame(hud_right, style="Panel.TFrame")
         pressure_wrap.pack(side="right", padx=(0, 14))
-        ttk.Label(pressure_wrap, textvariable=self.pressure_var, style="Muted.TLabel").pack(anchor="e")
+        # Center the pressure HUD content within its box
+        pressure_wrap.configure(width=280)
+        try:
+            pressure_wrap.pack_propagate(False)
+        except Exception:
+            pass
+        ttk.Label(pressure_wrap, textvariable=self.pressure_var, style="Muted.TLabel").pack(anchor="center")
         self.pressure_canvas = tk.Canvas(
             pressure_wrap,
-            width=260,
+            width=280,
             height=56,
             bg=self.p.panel,
             highlightthickness=0,
         )
-        self.pressure_canvas.pack(anchor="e", pady=(2, 0))
+        self.pressure_canvas.pack(anchor="center", pady=(2, 0))
         self._draw_pressure_monitor(remaining_s=0, limit_s=1)
 
         mid = ttk.Frame(self.game_frame)
@@ -487,6 +495,7 @@ class UI_Manager:
         handbook = ttk.Labelframe(mid, text="Medical Handbook (Search ICD-10)", padding=12)
         handbook.grid(row=0, column=1, sticky="nsew")
         handbook.rowconfigure(2, weight=1)
+        handbook.rowconfigure(3, weight=0)
         handbook.columnconfigure(0, weight=1)
 
         self.search_var = tk.StringVar(value="")
@@ -518,7 +527,11 @@ class UI_Manager:
 
         res_scroll = ttk.Scrollbar(handbook, orient="vertical", command=self.results_tree.yview)
         self.results_tree.configure(yscrollcommand=res_scroll.set)
-        res_scroll.grid(row=2, column=2, sticky="ns")
+        res_scroll.grid(row=2, column=2, sticky="ns", rowspan=2)
+
+        res_xscroll = ttk.Scrollbar(handbook, orient="horizontal", command=self.results_tree.xview)
+        self.results_tree.configure(xscrollcommand=res_xscroll.set)
+        res_xscroll.grid(row=3, column=0, columnspan=2, sticky="ew", pady=(6, 0))
 
         self.results_tree.bind("<<TreeviewSelect>>", lambda _e: self._select_from_result_tree())
         self.results_tree.bind("<Double-1>", lambda _e: self._select_from_result_tree(submit=True))
